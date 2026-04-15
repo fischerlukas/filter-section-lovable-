@@ -69,7 +69,7 @@ export default function ShelfConfigurator() {
         {!collapsed && (
           <div className="flex flex-col lg:flex-row">
             {/* Left: Config */}
-            <div className="flex-1 px-8 py-6 space-y-6 border-r border-border">
+            <div className="flex-1 px-8 py-6 space-y-6 border-r border-dashed border-border">
               {/* Load */}
               <div>
                 <label className="text-xs font-semibold tracking-wider text-muted-foreground uppercase mb-3 block">
