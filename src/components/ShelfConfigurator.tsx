@@ -48,7 +48,7 @@ export default function ShelfConfigurator() {
       </svg>
       <div className="bg-card shadow-lg max-w-5xl w-full overflow-hidden relative z-10" style={{ borderRadius: '50px' }}>
         {/* Header */}
-        <div className="flex items-center justify-between px-8 py-6 border-b border-dashed border-border">
+        <div className="flex items-center justify-between px-12 pt-10 pb-6 border-b border-dashed border-border">
           <div className="flex items-center gap-3">
             <SlidersHorizontal className="h-5 w-5 text-primary" />
             <h1 className="text-xl font-semibold text-foreground">
@@ -69,7 +69,7 @@ export default function ShelfConfigurator() {
         {!collapsed && (
           <div className="flex flex-col lg:flex-row">
             {/* Left: Config */}
-            <div className="flex-1 px-8 py-6 space-y-6 border-r border-dashed border-border">
+            <div className="flex-1 px-12 py-8 pb-12 space-y-6 border-r border-dashed border-border">
               {/* Load */}
               <div>
                 <label className="text-xs font-semibold tracking-wider text-muted-foreground uppercase mb-3 block">
@@ -224,7 +224,7 @@ export default function ShelfConfigurator() {
             </div>
 
             {/* Right: Illustration */}
-            <div className="w-full lg:w-80 flex flex-col items-center justify-center p-8 gap-4">
+            <div className="w-full lg:w-80 flex flex-col items-center justify-center p-12 gap-4">
               <div className="w-48 h-48 border-2 border-dashed border-border rounded-xl flex items-center justify-center">
                 <span className="text-sm text-muted-foreground">Regal-Illustration</span>
               </div>
