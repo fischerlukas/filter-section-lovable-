@@ -35,19 +35,15 @@ export default function ShelfConfigurator() {
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden bg-gradient-to-b from-card to-secondary">
-      {/* Wavy divider – gentle curve like the reference */}
+      {/* Diagonal curved background divider */}
       <svg
-        className="absolute left-0 w-full pointer-events-none"
-        style={{ top: "38%" }}
-        viewBox="0 0 1440 200"
+        className="absolute inset-0 w-full h-full pointer-events-none"
+        viewBox="0 0 1440 900"
         preserveAspectRatio="none"
-        fill="none"
       >
         <path
-          d="M0,120 C360,40 720,180 1440,80"
-          stroke="hsl(0 0% 88%)"
-          strokeWidth="2"
-          fill="none"
+          d="M1440,0 L1440,900 L0,900 L0,500 C300,700 700,200 1440,0 Z"
+          fill="hsl(0 0% 93%)"
         />
       </svg>
       <div className="bg-card rounded-2xl shadow-lg max-w-5xl w-full overflow-hidden relative z-10">
