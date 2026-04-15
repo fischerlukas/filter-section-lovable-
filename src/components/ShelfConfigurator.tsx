@@ -82,7 +82,7 @@ export default function ShelfConfigurator() {
                       onClick={() => setLoad(opt)}
                       className={`px-5 py-2 text-sm font-medium rounded-full transition-all ${
                         load === opt
-                          ? "bg-foreground text-card shadow-sm"
+                          ? "bg-primary text-primary-foreground shadow-sm"
                           : "text-muted-foreground hover:text-foreground"
                       }`}
                     >
