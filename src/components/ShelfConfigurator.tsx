@@ -34,18 +34,7 @@ export default function ShelfConfigurator() {
   const [activeTab, setActiveTab] = useState<"config" | "accessories" | "faq">("config");
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden bg-gradient-to-b from-card to-secondary">
-      {/* Diagonal curved background divider */}
-      <svg
-        className="absolute inset-0 w-full h-full pointer-events-none"
-        viewBox="0 0 1440 900"
-        preserveAspectRatio="none"
-      >
-        <path
-          d="M1440,0 L1440,900 L0,900 L0,500 C300,700 700,200 1440,0 Z"
-          fill="hsl(0 0% 93%)"
-        />
-      </svg>
+    <div className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden">
       <div className="bg-card rounded-2xl shadow-lg max-w-5xl w-full overflow-hidden relative z-10">
         {/* Header */}
         <div className="flex items-center justify-between px-8 py-6 border-b border-border">
