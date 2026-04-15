@@ -46,7 +46,7 @@ export default function ShelfConfigurator() {
           fill="hsl(0 0% 93%)"
         />
       </svg>
-      <div className="bg-card rounded-2xl shadow-lg max-w-5xl w-full overflow-hidden relative z-10">
+      <div className="bg-card shadow-lg max-w-5xl w-full overflow-hidden relative z-10" style={{ borderRadius: '50px' }}>
         {/* Header */}
         <div className="flex items-center justify-between px-8 py-6 border-b border-dashed border-border">
           <div className="flex items-center gap-3">
