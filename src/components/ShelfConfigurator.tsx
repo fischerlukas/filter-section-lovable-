@@ -35,6 +35,17 @@ export default function ShelfConfigurator() {
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden">
+      {/* Background split – gray top, white bottom with gentle curve */}
+      <svg
+        className="absolute inset-0 w-full h-full pointer-events-none"
+        viewBox="0 0 1440 900"
+        preserveAspectRatio="none"
+      >
+        <path
+          d="M0,0 L1440,0 L1440,400 C1100,600 340,300 0,500 Z"
+          fill="hsl(0 0% 93%)"
+        />
+      </svg>
       <div className="bg-card rounded-2xl shadow-lg max-w-5xl w-full overflow-hidden relative z-10">
         {/* Header */}
         <div className="flex items-center justify-between px-8 py-6 border-b border-border">
