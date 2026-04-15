@@ -48,7 +48,7 @@ export default function ShelfConfigurator() {
       </svg>
       <div className="bg-card rounded-2xl shadow-lg max-w-5xl w-full overflow-hidden relative z-10">
         {/* Header */}
-        <div className="flex items-center justify-between px-8 py-6 border-b border-border">
+        <div className="flex items-center justify-between px-8 py-6 border-b border-dashed border-border">
           <div className="flex items-center gap-3">
             <SlidersHorizontal className="h-5 w-5 text-primary" />
             <h1 className="text-xl font-semibold text-foreground">
