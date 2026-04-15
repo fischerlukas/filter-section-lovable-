@@ -42,7 +42,7 @@ export default function ShelfConfigurator() {
         preserveAspectRatio="none"
       >
         <path
-          d="M0,0 L1440,0 L1440,350 Q720,600 0,350 Z"
+          d="M0,0 L1440,0 L1440,380 Q720,500 0,380 Z"
           fill="hsl(0 0% 93%)"
         />
       </svg>
