@@ -224,7 +224,7 @@ export default function ShelfConfigurator() {
             </div>
 
             {/* Right: Illustration */}
-            <div className="w-full lg:w-80 flex flex-col items-center justify-center p-8 gap-4">
+            <div className="w-full lg:w-80 flex flex-col items-center justify-center p-12 gap-4">
               <div className="w-48 h-48 border-2 border-dashed border-border rounded-xl flex items-center justify-center">
                 <span className="text-sm text-muted-foreground">Regal-Illustration</span>
               </div>
