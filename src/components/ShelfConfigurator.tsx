@@ -34,8 +34,20 @@ export default function ShelfConfigurator() {
   const [activeTab, setActiveTab] = useState<"config" | "accessories" | "faq">("config");
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4">
-      <div className="bg-card rounded-2xl shadow-lg max-w-5xl w-full overflow-hidden">
+    <div className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden">
+      {/* Wavy background */}
+      <svg
+        className="absolute bottom-0 left-0 w-full pointer-events-none"
+        viewBox="0 0 1440 320"
+        preserveAspectRatio="none"
+        style={{ height: "40vh" }}
+      >
+        <path
+          fill="hsl(0 0% 92%)"
+          d="M0,160L48,170.7C96,181,192,203,288,197.3C384,192,480,160,576,149.3C672,139,768,149,864,170.7C960,192,1056,224,1152,218.7C1248,213,1344,171,1392,149.3L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+        />
+      </svg>
+      <div className="bg-card rounded-2xl shadow-lg max-w-5xl w-full overflow-hidden relative z-10">
         {/* Header */}
         <div className="flex items-center justify-between px-8 py-6 border-b border-border">
           <div className="flex items-center gap-3">
@@ -162,13 +174,13 @@ export default function ShelfConfigurator() {
                       className={`rounded-xl border-2 p-4 text-left transition-all ${
                         surface === s.id
                           ? "border-primary bg-primary/5"
-                          : "border-border hover:border-muted-foreground/30"
+                          : "border-transparent bg-secondary hover:border-muted-foreground/30"
                       }`}
                     >
-                      <div className="h-10 w-10 rounded bg-secondary mb-3" />
+                      <div className="h-10 w-10 rounded bg-muted mb-3" />
                       <div className="text-sm font-medium text-foreground">{s.label}</div>
                       <div className="text-xs text-muted-foreground">{s.sub}</div>
-                      <div className={`text-sm font-semibold mt-1 ${surface === s.id && s.id === "none" ? "text-primary" : "text-foreground"}`}>
+                      <div className={`text-sm font-semibold mt-1 ${surface === s.id ? "text-primary" : "text-foreground"}`}>
                         {s.price}
                       </div>
                     </button>
