@@ -254,9 +254,9 @@ export default function ShelfConfigurator() {
               <div className="flex gap-3 pt-2">
                 <button
                   onClick={() => setActiveTab("config")}
-                  className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all flex items-center gap-2 ${
+                  className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-300 flex items-center gap-2 ${
                     activeTab === "config"
-                      ? "bg-primary text-primary-foreground shadow-md"
+                      ? "bg-primary text-primary-foreground shadow-[0_8px_25px_-5px_hsl(var(--primary)/0.5)] hover:shadow-[0_12px_35px_-5px_hsl(var(--primary)/0.6)] hover:scale-105 hover:-translate-y-0.5"
                       : "border border-border text-foreground hover:bg-secondary"
                   }`}
                 >
