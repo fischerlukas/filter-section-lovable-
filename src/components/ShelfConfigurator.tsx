@@ -157,7 +157,7 @@ export default function ShelfConfigurator() {
         />
       </svg>
       <div className="bg-card w-full max-w-5xl relative z-10 mt-0 sm:mt-16 rounded-none sm:rounded-[50px] shadow-none sm:shadow-[0_0_45px_5px_rgba(0,0,0,0.08)]">
-        <div className="flex items-center justify-center px-6 sm:px-12 pt-6 sm:pt-10 pb-4 sm:pb-6 border-b border-dashed border-border">
+        <div className="hidden sm:flex items-center justify-center px-6 sm:px-12 pt-6 sm:pt-10 pb-4 sm:pb-6 border-b border-dashed border-border">
           <div className="flex items-center gap-3">
             <SlidersHorizontal className="h-5 w-5 text-primary" />
             <h1 className="text-lg sm:text-xl font-semibold text-foreground">Wähle dein Palettenregal</h1>
@@ -170,6 +170,11 @@ export default function ShelfConfigurator() {
             {/* Bild oben auf Mobile/Tablet */}
             <div className="w-full lg:hidden flex flex-col items-center justify-center p-6 sm:p-8 gap-4 border-b border-dashed border-border">
               <img src={shelfIllustration} alt="Regal-Illustration mit Höhe, Länge, Tiefe und Ebenen" className="w-full max-w-xs object-contain" />
+              {/* Titel unter dem Bild nur auf Smartphone */}
+              <div className="flex sm:hidden items-center gap-3">
+                <SlidersHorizontal className="h-5 w-5 text-primary" />
+                <h1 className="text-lg font-semibold text-foreground">Wähle dein Palettenregal</h1>
+              </div>
             </div>
 
             <div className="w-full lg:w-[50%] px-6 sm:px-12 py-6 sm:py-8 pb-8 sm:pb-12 space-y-6 lg:border-r border-dashed border-border">
