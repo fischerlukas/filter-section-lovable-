@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { ChevronDown, ChevronUp, ArrowRight, SlidersHorizontal } from "lucide-react";
 
 const loadOptions = ["500 kg", "1.000 kg", "1.500 kg"];
@@ -17,6 +18,12 @@ type CustomSelectProps = {
   onChange: (value: string) => void;
 };
 
+type MenuPosition = {
+  top: number;
+  left: number;
+  width: number;
+};
+
 const surfaces: { id: SurfaceType; label: string; sub: string; price: string }[] = [
   { id: "none", label: "Ohne Auflage", sub: "Ohne Aufpreis", price: "inkl." },
   { id: "wire", label: "Drahtgitter", sub: "Verzinkt", price: "104,31 €" },
@@ -25,7 +32,9 @@ const surfaces: { id: SurfaceType; label: string; sub: string; price: string }[]
 
 function CustomSelect({ label, value, options, onChange }: CustomSelectProps) {
   const [open, setOpen] = useState(false);
+  const [menuPosition, setMenuPosition] = useState<MenuPosition | null>(null);
   const ref = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -35,6 +44,25 @@ function CustomSelect({ label, value, options, onChange }: CustomSelectProps) {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  useEffect(() => {
+    if (!open) return;
+
+    const updateMenuPosition = () => {
+      const rect = triggerRef.current?.getBoundingClientRect();
+      if (!rect) return;
+      setMenuPosition({ top: rect.bottom + 6, left: rect.left, width: rect.width });
+    };
+
+    updateMenuPosition();
+    window.addEventListener("resize", updateMenuPosition);
+    window.addEventListener("scroll", updateMenuPosition, true);
+
+    return () => {
+      window.removeEventListener("resize", updateMenuPosition);
+      window.removeEventListener("scroll", updateMenuPosition, true);
+    };
+  }, [open]);
+
   return (
     <div>
       <label className="text-xs font-semibold tracking-wider text-muted-foreground uppercase mb-2 block">
@@ -42,6 +70,7 @@ function CustomSelect({ label, value, options, onChange }: CustomSelectProps) {
       </label>
       <div className="relative" ref={ref}>
         <button
+          ref={triggerRef}
           type="button"
           onClick={() => setOpen(!open)}
           className="flex h-10 w-full items-center justify-between rounded-full border border-input bg-card px-5 text-sm transition-colors hover:border-muted-foreground/50"
@@ -51,13 +80,19 @@ function CustomSelect({ label, value, options, onChange }: CustomSelectProps) {
           </span>
           <ChevronDown className={`h-4 w-4 text-muted-foreground transition-transform ${open ? "rotate-180" : ""}`} />
         </button>
-        {open && (
-          <div className="absolute left-0 right-0 top-full z-50 mt-1.5 rounded-2xl border border-input bg-card py-1.5 shadow-lg animate-in fade-in-0 zoom-in-95 duration-150">
+        {open && menuPosition && createPortal(
+          <div
+            className="fixed z-[100] rounded-2xl border border-input bg-card py-1.5 shadow-lg animate-in fade-in-0 zoom-in-95 duration-150"
+            style={{ top: menuPosition.top, left: menuPosition.left, width: menuPosition.width }}
+          >
             {options.map((option) => (
               <button
                 key={option}
                 type="button"
-                onClick={() => { onChange(option); setOpen(false); }}
+                onClick={() => {
+                  onChange(option);
+                  setOpen(false);
+                }}
                 className={`flex w-full items-center px-5 py-2 text-sm transition-colors hover:bg-secondary ${
                   value === option ? "text-primary font-medium" : "text-foreground"
                 }`}
@@ -65,7 +100,8 @@ function CustomSelect({ label, value, options, onChange }: CustomSelectProps) {
                 {option}
               </button>
             ))}
-          </div>
+          </div>,
+          document.body,
         )}
       </div>
     </div>
