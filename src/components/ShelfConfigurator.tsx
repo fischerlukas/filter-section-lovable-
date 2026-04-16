@@ -2,6 +2,13 @@ import { useState, useMemo } from "react";
 import shelfIllustration from "@/assets/shelf-illustration.png";
 import { Check, X } from "lucide-react";
 import { ChevronDown, ArrowRight, SlidersHorizontal } from "lucide-react";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetClose,
+} from "@/components/ui/sheet";
 
 const loadOptions = ["500 kg", "1.000 kg", "1.500 kg"];
 
@@ -105,7 +112,7 @@ export default function ShelfConfigurator() {
   const [levelsSelected, setLevelsSelected] = useState<string | null>(null);
   const [surfaceSelected, setSurfaceSelected] = useState<SurfaceType | null>(null);
   const [activeTab, setActiveTab] = useState<"config" | "accessories" | "faq">("config");
-  const [mobileConfigOpen, setMobileConfigOpen] = useState(true);
+  const [mobileFilterOpen, setMobileFilterOpen] = useState(false);
 
   const allFilters = useMemo(() => {
     const filters: { label: string; value: string; remove: () => void }[] = [];
