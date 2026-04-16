@@ -127,7 +127,7 @@ export default function ShelfConfigurator() {
                             <div className="size-2.5 rounded-full bg-muted-foreground/30" />
                           )}
                         </div>
-                        <span className={`text-base tabular-nums tracking-wide ${isActive ? "font-black" : "font-bold"}`}>
+                        <span className="text-base tabular-nums tracking-wide font-bold">
                           {opt}
                         </span>
                       </button>
