@@ -176,8 +176,8 @@ export default function ShelfConfigurator() {
             {/* Bild oben auf Mobile/Tablet */}
             <div className="w-full lg:hidden flex flex-col items-center justify-center p-6 sm:p-8 gap-4">
               <img src={shelfIllustration} alt="Regal-Illustration mit Höhe, Länge, Tiefe und Ebenen" className="w-full max-w-xs object-contain" />
-              {/* Titel auf Tablet (sm), nicht auf Smartphone */}
-              <div className="hidden sm:flex lg:hidden items-center gap-3 w-full justify-center">
+              {/* Titel auf Smartphone */}
+              <div className="flex sm:hidden items-center gap-3 w-full justify-center">
                 <SlidersHorizontal className="h-5 w-5 text-primary" />
                 <h1 className="text-lg font-semibold text-foreground">Wähle dein Palettenregal</h1>
               </div>
@@ -187,9 +187,9 @@ export default function ShelfConfigurator() {
             <div className="sm:hidden w-full px-6 pb-6 flex flex-col items-stretch gap-3 min-h-[88px]">
               <button
                 onClick={() => setMobileFilterOpen(true)}
-                className="group w-full rounded-full bg-primary px-5 py-3.5 text-sm font-medium text-primary-foreground text-center inline-flex items-center justify-center gap-2 shadow-[0_18px_40px_-8px_hsl(var(--primary)/0.55)] transition-all duration-300 hover:bg-primary/90 hover:shadow-[0_22px_50px_-6px_hsl(var(--primary)/0.7)] hover:-translate-y-0.5 active:translate-y-0 active:shadow-[0_10px_25px_-8px_hsl(var(--primary)/0.5)]"
+                className="w-full rounded-full border border-border px-5 py-3 text-sm font-medium text-foreground hover:bg-secondary transition-colors text-center inline-flex items-center justify-center gap-2"
               >
-                <SlidersHorizontal className="h-4 w-4 transition-transform duration-300 group-hover:rotate-12" />
+                <SlidersHorizontal className="h-4 w-4 text-primary" />
                 Wähle dein Palettenregal
               </button>
               <span className="text-sm text-muted-foreground text-center">
