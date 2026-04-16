@@ -346,7 +346,7 @@ export default function ShelfConfigurator() {
           </>
         )}
 
-        <div className="relative mt-2">
+        <div className="relative mt-2 mb-48">
           <label className="text-xs font-semibold tracking-wider text-muted-foreground uppercase mr-3">
             Sortieren nach:
           </label>
