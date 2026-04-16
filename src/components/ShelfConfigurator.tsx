@@ -133,7 +133,7 @@ export default function ShelfConfigurator() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center p-4 relative overflow-hidden" style={{ background: 'linear-gradient(to bottom, hsl(0 0% 96%) 0%, hsl(0 0% 100%) 50%)' }}>
+    <div className="min-h-screen flex flex-col items-center justify-center p-2 sm:p-4 relative overflow-hidden" style={{ background: 'linear-gradient(to bottom, hsl(0 0% 96%) 0%, hsl(0 0% 100%) 50%)' }}>
       <svg
         className="absolute top-0 left-0 w-full pointer-events-none"
         style={{ height: '500px' }}
@@ -156,18 +156,23 @@ export default function ShelfConfigurator() {
           filter="url(#innerShadow)"
         />
       </svg>
-      <div className="bg-card max-w-5xl w-full relative z-10 mt-16" style={{ borderRadius: "50px", boxShadow: "0 0 45px 5px rgba(0,0,0,0.08)" }}>
-        <div className="flex items-center justify-center px-12 pt-10 pb-6 border-b border-dashed border-border">
+      <div className="bg-card max-w-5xl w-full relative z-10 mt-8 sm:mt-16" style={{ borderRadius: "clamp(24px, 5vw, 50px)", boxShadow: "0 0 45px 5px rgba(0,0,0,0.08)" }}>
+        <div className="flex items-center justify-center px-6 sm:px-12 pt-6 sm:pt-10 pb-4 sm:pb-6 border-b border-dashed border-border">
           <div className="flex items-center gap-3">
             <SlidersHorizontal className="h-5 w-5 text-primary" />
-            <h1 className="text-xl font-semibold text-foreground">Wähle dein Palettenregal</h1>
+            <h1 className="text-lg sm:text-xl font-semibold text-foreground">Wähle dein Palettenregal</h1>
           </div>
         </div>
 
 
 
           <div className="flex flex-col lg:flex-row">
-            <div className="w-full lg:w-[50%] px-12 py-8 pb-12 space-y-6 border-r border-dashed border-border">
+            {/* Bild oben auf Mobile/Tablet */}
+            <div className="w-full lg:hidden flex flex-col items-center justify-center p-6 sm:p-8 gap-4 border-b border-dashed border-border">
+              <img src={shelfIllustration} alt="Regal-Illustration mit Höhe, Länge, Tiefe und Ebenen" className="w-full max-w-xs object-contain" />
+            </div>
+
+            <div className="w-full lg:w-[50%] px-6 sm:px-12 py-6 sm:py-8 pb-8 sm:pb-12 space-y-6 lg:border-r border-dashed border-border">
               <div>
                 <label className="text-xs font-semibold tracking-wider text-muted-foreground uppercase mb-3 block">
                   Belastung pro Palette
@@ -260,7 +265,7 @@ export default function ShelfConfigurator() {
               </div>
             </div>
 
-            <div className="w-full lg:w-[50%] flex flex-col items-center justify-center p-12 gap-6">
+            <div className="hidden lg:flex w-full lg:w-[50%] flex-col items-center justify-center p-12 gap-6">
               <img src={shelfIllustration} alt="Regal-Illustration mit Höhe, Länge, Tiefe und Ebenen" className="w-full object-contain" />
               <div className="flex flex-col items-center gap-2">
                 <div className="relative w-16 h-16 flex items-center justify-center">
