@@ -132,7 +132,7 @@ export default function ShelfConfigurator() {
                   {surfaces.map((s) => (
                     <button
                       key={s.id}
-                      onClick={() => setSurface(s.id)}
+                      onClick={() => setSurface(surface === s.id ? "none" : s.id)}
                       className={`rounded-xl border-2 p-4 text-left transition-all ${
                         surface === s.id
                           ? "border-primary bg-primary/5"
