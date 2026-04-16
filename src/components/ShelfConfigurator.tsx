@@ -100,6 +100,32 @@ export default function ShelfConfigurator() {
   const [surfaces_selected, setSurfacesSelected] = useState<Set<SurfaceType>>(new Set());
   const [activeTab, setActiveTab] = useState<"config" | "accessories" | "faq">("config");
 
+  const allFilters = useMemo(() => {
+    const filters: { label: string; value: string; remove: () => void }[] = [];
+    widthSelected.forEach((v) => filters.push({ label: v, value: v, remove: () => setWidthSelected((prev) => { const n = new Set(prev); n.delete(v); return n; }) }));
+    heightSelected.forEach((v) => filters.push({ label: v, value: v, remove: () => setHeightSelected((prev) => { const n = new Set(prev); n.delete(v); return n; }) }));
+    depthSelected.forEach((v) => filters.push({ label: v, value: v, remove: () => setDepthSelected((prev) => { const n = new Set(prev); n.delete(v); return n; }) }));
+    levelsSelected.forEach((v) => filters.push({ label: v + " Ebenen", value: v, remove: () => setLevelsSelected((prev) => { const n = new Set(prev); n.delete(v); return n; }) }));
+    loadsSelected.forEach((v) => filters.push({ label: v, value: v, remove: () => setLoadsSelected((prev) => { const n = new Set(prev); n.delete(v); return n; }) }));
+    surfaces_selected.forEach((v) => {
+      const s = surfaceOptions.find((o) => o.id === v);
+      if (s) filters.push({ label: s.label, value: v, remove: () => setSurfacesSelected((prev) => { const n = new Set(prev); n.delete(v); return n; }) });
+    });
+    return filters;
+  }, [widthSelected, heightSelected, depthSelected, levelsSelected, loadsSelected, surfaces_selected]);
+
+  const totalProducts = 1020;
+  const filteredCount = allFilters.length > 0 ? Math.max(1, Math.round(totalProducts / (allFilters.length * 3 + 1))) : totalProducts;
+
+  const clearAll = () => {
+    setWidthSelected(new Set());
+    setHeightSelected(new Set());
+    setDepthSelected(new Set());
+    setLevelsSelected(new Set());
+    setLoadsSelected(new Set());
+    setSurfacesSelected(new Set());
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden">
       <svg
