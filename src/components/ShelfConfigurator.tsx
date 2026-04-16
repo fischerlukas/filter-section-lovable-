@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Check } from "lucide-react";
 import { ChevronDown, ChevronUp, ArrowRight, SlidersHorizontal } from "lucide-react";
 
 const loadOptions = ["500 kg", "1.000 kg", "1.500 kg"];
@@ -97,9 +98,9 @@ export default function ShelfConfigurator() {
                 <label className="text-xs font-semibold tracking-wider text-muted-foreground uppercase mb-3 block">
                   Belastung / Palette
                 </label>
-                <div className="grid grid-cols-3 gap-3">
+                <div className="flex flex-wrap items-center gap-4">
                   {loadOptions.map((opt) => {
-                    const num = opt.replace(" kg", "");
+                    const isActive = loadsSelected.has(opt);
                     return (
                       <button
                         key={opt}
@@ -111,18 +112,24 @@ export default function ShelfConfigurator() {
                             return next;
                           });
                         }}
-                        className={`rounded-xl border-2 p-4 text-center transition-all ${
-                          loadsSelected.has(opt)
-                            ? "border-primary bg-primary/5"
-                            : "border-transparent bg-secondary hover:border-muted-foreground/30"
+                        className={`group relative flex items-center gap-3 pl-3 pr-6 py-3 rounded-full transition-all ${
+                          isActive
+                            ? "bg-primary text-primary-foreground shadow-lg ring-2 ring-primary ring-offset-2 ring-offset-card"
+                            : "bg-secondary text-muted-foreground hover:bg-muted hover:text-foreground ring-1 ring-border hover:ring-muted-foreground/40"
                         }`}
                       >
-                        <div className={`text-2xl font-bold ${loadsSelected.has(opt) ? "text-primary" : "text-foreground"}`}>
-                          {num}
+                        <div className={`flex size-7 shrink-0 items-center justify-center rounded-full shadow-sm ${
+                          isActive ? "bg-white" : "bg-muted ring-1 ring-border"
+                        }`}>
+                          {isActive ? (
+                            <Check className="h-4 w-4 text-primary" />
+                          ) : (
+                            <div className="size-2.5 rounded-full bg-muted-foreground/30" />
+                          )}
                         </div>
-                        <div className={`text-xs font-medium mt-1 ${loadsSelected.has(opt) ? "text-primary/70" : "text-muted-foreground"}`}>
-                          kg / Palette
-                        </div>
+                        <span className={`text-base tabular-nums tracking-wide ${isActive ? "font-black" : "font-bold"}`}>
+                          {opt}
+                        </span>
                       </button>
                     );
                   })}
