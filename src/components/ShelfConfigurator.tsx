@@ -58,7 +58,8 @@ function MultiSelectDropdown({ label, selected, options, onChange }: MultiSelect
       {open && (
         <>
           <div className="fixed inset-0 z-10" onClick={() => setOpen(false)} />
-          <div className="absolute left-0 right-0 top-full z-20 mt-1 max-h-48 overflow-auto rounded-2xl border border-border bg-card p-1 shadow-lg scrollbar-thin">
+          <div className="absolute left-0 right-0 top-full z-20 mt-1 max-h-48 overflow-hidden rounded-2xl border border-border bg-card shadow-lg">
+            <div className="overflow-auto max-h-48 p-1 scrollbar-thin">
             {options.map((opt) => {
               const isSelected = selected.has(opt);
               return (
