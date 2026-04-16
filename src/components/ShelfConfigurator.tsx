@@ -127,7 +127,7 @@ export default function ShelfConfigurator() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden">
+    <div className="min-h-screen flex flex-col items-center justify-center p-4 relative overflow-hidden">
       <svg
         className="absolute inset-0 w-full h-full pointer-events-none"
         viewBox="0 0 1440 900"
