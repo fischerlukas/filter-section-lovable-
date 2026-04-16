@@ -202,7 +202,7 @@ export default function ShelfConfigurator() {
 
             {/* Mobile Filter Sheet */}
             <Sheet open={mobileFilterOpen} onOpenChange={setMobileFilterOpen}>
-              <SheetContent side="bottom" className="h-[90vh] rounded-t-2xl overflow-y-auto p-0 bg-white data-[state=open]:!duration-700 data-[state=closed]:!duration-500">
+              <SheetContent side="bottom" className="h-[90dvh] max-h-[90dvh] rounded-t-2xl overflow-y-auto p-0 bg-white data-[state=open]:!duration-700 data-[state=closed]:!duration-500">
                 <SheetHeader className="sticky top-0 bg-white z-10 flex flex-row items-center justify-between px-6 py-4 border-b border-border">
                   <SheetTitle className="text-base font-semibold uppercase tracking-wider">Filtern und Sortieren</SheetTitle>
                   <SheetClose className="rounded-full p-1 hover:bg-muted transition-colors">
