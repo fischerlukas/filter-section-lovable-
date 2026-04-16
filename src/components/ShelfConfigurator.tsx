@@ -265,7 +265,7 @@ export default function ShelfConfigurator() {
                   </span>
                 </button>
               </div>
-              <div className="border-t border-dashed border-border mt-2" />
+              <div className="border-t border-dashed border-border mt-2 sm:hidden" />
             </div>
 
             <div className="hidden lg:flex w-full lg:w-[50%] flex-col items-center justify-center p-12 gap-6">
