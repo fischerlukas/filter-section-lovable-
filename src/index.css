@@ -55,6 +55,20 @@
     scrollbar-gutter: stable;
   }
 
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background: hsl(var(--muted-foreground) / 0.2);
+    border-radius: 9999px;
+  }
+  .scrollbar-thin:hover::-webkit-scrollbar-thumb {
+    background: hsl(var(--muted-foreground) / 0.4);
+  }
+
   body {
     @apply bg-background text-foreground;
     font-family: 'Avenir', 'Avenir Next', system-ui, -apple-system, sans-serif;
