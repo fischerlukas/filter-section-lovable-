@@ -153,7 +153,7 @@ export default function ShelfConfigurator() {
           fill="hsl(0 0% 93%)"
         />
       </svg>
-      <div className="bg-card shadow-lg max-w-5xl w-full relative z-10" style={{ borderRadius: "50px" }}>
+      <div className="bg-card shadow-lg max-w-5xl w-full relative z-10 mt-16" style={{ borderRadius: "50px" }}>
         <div className="flex items-center justify-center px-12 pt-10 pb-6 border-b border-dashed border-border">
           <div className="flex items-center gap-3">
             <SlidersHorizontal className="h-5 w-5 text-primary" />
