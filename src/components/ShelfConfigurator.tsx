@@ -18,26 +18,22 @@ const surfaceOptions: { id: SurfaceType; label: string; sub: string; price: stri
   { id: "wood", label: "Holzboden", sub: "Spanplatte", price: "41,80 €" },
 ];
 
-type MultiSelectProps = {
+type SingleSelectProps = {
   label: string;
-  selected: Set<string>;
+  selected: string | null;
   options: string[];
-  onChange: (selected: Set<string>) => void;
+  onChange: (selected: string | null) => void;
 };
 
-function MultiSelectDropdown({ label, selected, options, onChange }: MultiSelectProps) {
+function SingleSelectDropdown({ label, selected, options, onChange }: SingleSelectProps) {
   const [open, setOpen] = useState(false);
 
   const toggle = (opt: string) => {
-    const next = new Set(selected);
-    if (next.has(opt)) next.delete(opt);
-    else next.add(opt);
-    onChange(next);
+    onChange(selected === opt ? null : opt);
+    setOpen(false);
   };
 
-  const displayText = selected.size > 0
-    ? Array.from(selected).join(", ")
-    : "auswählen";
+  const displayText = selected ?? "auswählen";
 
   return (
     <div className="relative">
@@ -51,7 +47,7 @@ function MultiSelectDropdown({ label, selected, options, onChange }: MultiSelect
           open ? "border-primary" : "border-input"
         }`}
       >
-        <span className={`truncate pr-2 ${selected.size > 0 ? "text-foreground" : "text-muted-foreground"}`}>
+        <span className={`truncate pr-2 ${selected ? "text-foreground" : "text-muted-foreground"}`}>
           {displayText}
         </span>
         <ChevronDown className={`h-4 w-4 shrink-0 text-muted-foreground transition-transform ${open ? "rotate-180" : ""}`} />
@@ -62,7 +58,7 @@ function MultiSelectDropdown({ label, selected, options, onChange }: MultiSelect
           <div className="absolute left-0 right-0 top-full z-20 mt-1 max-h-48 overflow-hidden rounded-2xl border border-border bg-card shadow-lg">
             <div className="overflow-auto max-h-48 p-1 scrollbar-thin">
             {options.map((opt) => {
-              const isSelected = selected.has(opt);
+              const isSelected = selected === opt;
               return (
                 <button
                   key={opt}
@@ -74,7 +70,7 @@ function MultiSelectDropdown({ label, selected, options, onChange }: MultiSelect
                       : "text-muted-foreground hover:bg-muted hover:text-foreground"
                   }`}
                 >
-                  <div className={`flex size-5 shrink-0 items-center justify-center rounded-md border transition-colors ${
+                  <div className={`flex size-5 shrink-0 items-center justify-center rounded-full border transition-colors ${
                     isSelected ? "border-primary bg-primary" : "border-border bg-card"
                   }`}>
                     {isSelected && <Check className="h-3 w-3 text-primary-foreground" />}
@@ -105,40 +101,40 @@ const sortOptions = [
 
 export default function ShelfConfigurator() {
   
-  const [loadsSelected, setLoadsSelected] = useState<Set<string>>(new Set());
+  const [loadsSelected, setLoadsSelected] = useState<string | null>(null);
   const [sortBy, setSortBy] = useState("Ausgewählt");
   const [sortOpen, setSortOpen] = useState(false);
-  const [widthSelected, setWidthSelected] = useState<Set<string>>(new Set());
-  const [heightSelected, setHeightSelected] = useState<Set<string>>(new Set());
-  const [depthSelected, setDepthSelected] = useState<Set<string>>(new Set());
-  const [levelsSelected, setLevelsSelected] = useState<Set<string>>(new Set());
-  const [surfaces_selected, setSurfacesSelected] = useState<Set<SurfaceType>>(new Set());
+  const [widthSelected, setWidthSelected] = useState<string | null>(null);
+  const [heightSelected, setHeightSelected] = useState<string | null>(null);
+  const [depthSelected, setDepthSelected] = useState<string | null>(null);
+  const [levelsSelected, setLevelsSelected] = useState<string | null>(null);
+  const [surfaceSelected, setSurfaceSelected] = useState<SurfaceType | null>(null);
   const [activeTab, setActiveTab] = useState<"config" | "accessories" | "faq">("config");
 
   const allFilters = useMemo(() => {
     const filters: { label: string; value: string; remove: () => void }[] = [];
-    widthSelected.forEach((v) => filters.push({ label: v, value: v, remove: () => setWidthSelected((prev) => { const n = new Set(prev); n.delete(v); return n; }) }));
-    heightSelected.forEach((v) => filters.push({ label: v, value: v, remove: () => setHeightSelected((prev) => { const n = new Set(prev); n.delete(v); return n; }) }));
-    depthSelected.forEach((v) => filters.push({ label: v, value: v, remove: () => setDepthSelected((prev) => { const n = new Set(prev); n.delete(v); return n; }) }));
-    levelsSelected.forEach((v) => filters.push({ label: v + " Ebenen", value: v, remove: () => setLevelsSelected((prev) => { const n = new Set(prev); n.delete(v); return n; }) }));
-    loadsSelected.forEach((v) => filters.push({ label: v, value: v, remove: () => setLoadsSelected((prev) => { const n = new Set(prev); n.delete(v); return n; }) }));
-    surfaces_selected.forEach((v) => {
-      const s = surfaceOptions.find((o) => o.id === v);
-      if (s) filters.push({ label: s.label, value: v, remove: () => setSurfacesSelected((prev) => { const n = new Set(prev); n.delete(v); return n; }) });
-    });
+    if (widthSelected) filters.push({ label: widthSelected, value: widthSelected, remove: () => setWidthSelected(null) });
+    if (heightSelected) filters.push({ label: heightSelected, value: heightSelected, remove: () => setHeightSelected(null) });
+    if (depthSelected) filters.push({ label: depthSelected, value: depthSelected, remove: () => setDepthSelected(null) });
+    if (levelsSelected) filters.push({ label: levelsSelected + " Ebenen", value: levelsSelected, remove: () => setLevelsSelected(null) });
+    if (loadsSelected) filters.push({ label: loadsSelected, value: loadsSelected, remove: () => setLoadsSelected(null) });
+    if (surfaceSelected) {
+      const s = surfaceOptions.find((o) => o.id === surfaceSelected);
+      if (s) filters.push({ label: s.label, value: surfaceSelected, remove: () => setSurfaceSelected(null) });
+    }
     return filters;
-  }, [widthSelected, heightSelected, depthSelected, levelsSelected, loadsSelected, surfaces_selected]);
+  }, [widthSelected, heightSelected, depthSelected, levelsSelected, loadsSelected, surfaceSelected]);
 
   const totalProducts = 1020;
   const filteredCount = allFilters.length > 0 ? Math.max(1, Math.round(totalProducts / (allFilters.length * 3 + 1))) : totalProducts;
 
   const clearAll = () => {
-    setWidthSelected(new Set());
-    setHeightSelected(new Set());
-    setDepthSelected(new Set());
-    setLevelsSelected(new Set());
-    setLoadsSelected(new Set());
-    setSurfacesSelected(new Set());
+    setWidthSelected(null);
+    setHeightSelected(null);
+    setDepthSelected(null);
+    setLevelsSelected(null);
+    setLoadsSelected(null);
+    setSurfaceSelected(null);
   };
 
   return (
@@ -172,16 +168,11 @@ export default function ShelfConfigurator() {
                 </label>
                 <div className="flex flex-wrap items-center gap-2">
                   {loadOptions.map((opt) => {
-                    const isActive = loadsSelected.has(opt);
+                    const isActive = loadsSelected === opt;
                     return (
                       <button
                         key={opt}
-                        onClick={() => {
-                          setLoadsSelected((prev) => {
-                            if (prev.has(opt)) return new Set();
-                            return new Set([opt]);
-                          });
-                        }}
+                        onClick={() => setLoadsSelected(loadsSelected === opt ? null : opt)}
                         className={`group relative flex items-center gap-2 pl-2.5 pr-4 py-2 rounded-full border-2 transition-all ${
                           isActive
                             ? "bg-primary text-primary-foreground shadow-lg border-primary"
@@ -207,13 +198,13 @@ export default function ShelfConfigurator() {
               </div>
 
               <div className="grid grid-cols-2 gap-4">
-                <MultiSelectDropdown label="Breite" selected={widthSelected} options={widthOptions} onChange={setWidthSelected} />
-                <MultiSelectDropdown label="Höhe" selected={heightSelected} options={heightOptions} onChange={setHeightSelected} />
+                <SingleSelectDropdown label="Breite" selected={widthSelected} options={widthOptions} onChange={setWidthSelected} />
+                <SingleSelectDropdown label="Höhe" selected={heightSelected} options={heightOptions} onChange={setHeightSelected} />
               </div>
 
               <div className="grid grid-cols-2 gap-4">
-                <MultiSelectDropdown label="Tiefe" selected={depthSelected} options={depthOptions} onChange={setDepthSelected} />
-                <MultiSelectDropdown label="Anzahl Ebenen" selected={levelsSelected} options={levelOptions} onChange={setLevelsSelected} />
+                <SingleSelectDropdown label="Tiefe" selected={depthSelected} options={depthOptions} onChange={setDepthSelected} />
+                <SingleSelectDropdown label="Anzahl Ebenen" selected={levelsSelected} options={levelOptions} onChange={setLevelsSelected} />
               </div>
 
               <div>
@@ -224,16 +215,9 @@ export default function ShelfConfigurator() {
                   {surfaceOptions.map((s) => (
                     <button
                       key={s.id}
-                      onClick={() => {
-                        setSurfacesSelected((prev) => {
-                          const next = new Set(prev);
-                          if (next.has(s.id)) next.delete(s.id);
-                          else next.add(s.id);
-                          return next;
-                        });
-                      }}
+                      onClick={() => setSurfaceSelected(surfaceSelected === s.id ? null : s.id)}
                       className={`rounded-xl border-2 p-4 text-left transition-all ${
-                        surfaces_selected.has(s.id)
+                        surfaceSelected === s.id
                           ? "border-primary bg-primary/5"
                           : "border-transparent bg-secondary hover:border-muted-foreground/30"
                       }`}
@@ -241,7 +225,7 @@ export default function ShelfConfigurator() {
                       <div className="h-10 w-10 rounded bg-muted mb-3" />
                       <div className="text-sm font-medium text-foreground">{s.label}</div>
                       <div className="text-xs text-muted-foreground">{s.sub}</div>
-                      <div className={`text-sm font-semibold mt-1 ${surfaces_selected.has(s.id) ? "text-primary" : "text-foreground"}`}>
+                      <div className={`text-sm font-semibold mt-1 ${surfaceSelected === s.id ? "text-primary" : "text-foreground"}`}>
                         {s.id !== "none" ? `ab ${s.price}` : s.price}
                       </div>
                     </button>
