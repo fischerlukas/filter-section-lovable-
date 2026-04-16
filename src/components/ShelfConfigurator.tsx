@@ -63,7 +63,7 @@ function SingleSelectDropdown({ label, selected, options, onChange }: SingleSele
         <>
           <div className="fixed inset-0 z-10" onClick={() => setOpen(false)} />
           <div className="absolute left-0 right-0 top-full z-20 mt-1 max-h-48 overflow-hidden rounded-2xl border border-border bg-card shadow-lg">
-            <div className="overflow-auto max-h-48 p-1 scrollbar-thin">
+            <div className="overflow-auto max-h-48 p-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             {options.map((opt) => {
               const isSelected = selected === opt;
               return (
@@ -222,7 +222,7 @@ export default function ShelfConfigurator() {
                         <ChevronDown className={`h-4 w-4 text-muted-foreground transition-transform ${sortOpen ? "rotate-180" : ""}`} />
                       </button>
                       {sortOpen && (
-                        <div className="absolute left-0 right-0 top-full z-20 mt-1 max-h-48 overflow-auto rounded-2xl border border-border bg-card shadow-lg p-1">
+                        <div className="absolute left-0 right-0 top-full z-20 mt-1 max-h-48 overflow-auto rounded-2xl border border-border bg-card shadow-lg p-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
                           {sortOptions.map((opt) => (
                             <button
                               key={opt}
