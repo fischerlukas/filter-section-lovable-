@@ -153,7 +153,7 @@ export default function ShelfConfigurator() {
             <div className="w-full lg:w-[50%] px-12 py-8 pb-12 space-y-6 border-r border-dashed border-border">
               <div>
                 <label className="text-xs font-semibold tracking-wider text-muted-foreground uppercase mb-3 block">
-                  Belastung / Palette
+                  Belastung pro Palette
                 </label>
                 <div className="flex flex-wrap items-center gap-4">
                   {loadOptions.map((opt) => {
