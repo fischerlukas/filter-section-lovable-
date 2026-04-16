@@ -169,7 +169,7 @@ export default function ShelfConfigurator() {
                 <label className="text-xs font-semibold tracking-wider text-muted-foreground uppercase mb-3 block">
                   Belastung pro Palette
                 </label>
-                <div className="flex flex-wrap items-center gap-4">
+                <div className="flex flex-wrap items-center gap-2">
                   {loadOptions.map((opt) => {
                     const isActive = loadsSelected.has(opt);
                     return (
@@ -183,22 +183,22 @@ export default function ShelfConfigurator() {
                             return next;
                           });
                         }}
-                        className={`group relative flex items-center gap-3 pl-3 pr-6 py-3 rounded-full border-2 transition-all ${
+                        className={`group relative flex items-center gap-2 pl-2.5 pr-4 py-2 rounded-full border-2 transition-all ${
                           isActive
                             ? "bg-primary text-primary-foreground shadow-lg border-primary"
                             : "bg-secondary text-muted-foreground hover:bg-muted hover:text-foreground border-border hover:border-muted-foreground/40"
                         }`}
                       >
-                        <div className={`flex size-7 shrink-0 items-center justify-center rounded-full shadow-sm ${
+                        <div className={`flex size-5 shrink-0 items-center justify-center rounded-full shadow-sm ${
                           isActive ? "bg-white" : "bg-muted ring-1 ring-border"
                         }`}>
                           {isActive ? (
-                            <Check className="h-4 w-4 text-primary" />
+                            <Check className="h-3 w-3 text-primary" />
                           ) : (
-                            <div className="size-2.5 rounded-full bg-muted-foreground/30" />
+                            <div className="size-2 rounded-full bg-muted-foreground/30" />
                           )}
                         </div>
-                        <span className="text-base tabular-nums tracking-wide font-bold">
+                        <span className="text-sm tabular-nums tracking-wide font-bold">
                           {opt}
                         </span>
                       </button>
