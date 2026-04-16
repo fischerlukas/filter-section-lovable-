@@ -50,19 +50,8 @@
     @apply border-border;
   }
 
-  html {
-    overflow-y: scroll;
-    scrollbar-gutter: stable;
-  }
-
   body {
     @apply bg-background text-foreground;
     font-family: 'Avenir', 'Avenir Next', system-ui, -apple-system, sans-serif;
-  }
-
-  /* Prevent Radix scroll-lock from shifting layout */
-  body[data-scroll-locked] {
-    padding-right: 0 !important;
-    margin-right: 0 !important;
   }
 }
