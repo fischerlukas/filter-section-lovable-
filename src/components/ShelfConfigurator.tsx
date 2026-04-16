@@ -85,10 +85,10 @@ function MultiSelectDropdown({ label, selected, options, onChange }: MultiSelect
 export default function ShelfConfigurator() {
   const [collapsed, setCollapsed] = useState(false);
   const [loadsSelected, setLoadsSelected] = useState<Set<string>>(new Set());
-  const [width, setWidth] = useState("");
-  const [height, setHeight] = useState("");
-  const [depth, setDepth] = useState("");
-  const [levels, setLevels] = useState("");
+  const [widthSelected, setWidthSelected] = useState<Set<string>>(new Set());
+  const [heightSelected, setHeightSelected] = useState<Set<string>>(new Set());
+  const [depthSelected, setDepthSelected] = useState<Set<string>>(new Set());
+  const [levelsSelected, setLevelsSelected] = useState<Set<string>>(new Set());
   const [surfaces_selected, setSurfacesSelected] = useState<Set<SurfaceType>>(new Set());
   const [activeTab, setActiveTab] = useState<"config" | "accessories" | "faq">("config");
 
