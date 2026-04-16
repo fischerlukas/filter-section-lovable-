@@ -177,10 +177,8 @@ export default function ShelfConfigurator() {
                         key={opt}
                         onClick={() => {
                           setLoadsSelected((prev) => {
-                            const next = new Set(prev);
-                            if (next.has(opt)) next.delete(opt);
-                            else next.add(opt);
-                            return next;
+                            if (prev.has(opt)) return new Set();
+                            return new Set([opt]);
                           });
                         }}
                         className={`group relative flex items-center gap-2 pl-2.5 pr-4 py-2 rounded-full border-2 transition-all ${
