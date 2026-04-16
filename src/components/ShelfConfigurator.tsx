@@ -156,7 +156,7 @@ export default function ShelfConfigurator() {
           filter="url(#innerShadow)"
         />
       </svg>
-      <div className="bg-card max-w-5xl w-full relative z-10 mt-16" style={{ borderRadius: "50px", boxShadow: "0 0 60px 10px rgba(0,0,0,0.12)" }}>
+      <div className="bg-card max-w-5xl w-full relative z-10 mt-16" style={{ borderRadius: "50px", boxShadow: "0 0 45px 5px rgba(0,0,0,0.08)" }}>
         <div className="flex items-center justify-center px-12 pt-10 pb-6 border-b border-dashed border-border">
           <div className="flex items-center gap-3">
             <SlidersHorizontal className="h-5 w-5 text-primary" />
