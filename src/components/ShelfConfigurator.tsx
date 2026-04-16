@@ -243,34 +243,6 @@ export default function ShelfConfigurator() {
                     </div>
                   </div>
 
-                  {/* Aktive Filter */}
-                  {allFilters.length > 0 && (
-                    <div className="border-t border-border pt-4 animate-fade-in-soft">
-                      <div className="flex items-center gap-2 mb-2">
-                        <span className="text-sm font-semibold text-foreground">Aktive Filter:</span>
-                        <div className="flex flex-wrap gap-2">
-                          {allFilters.map((f, i) => (
-                            <span
-                              key={i}
-                              className="inline-flex items-center gap-1.5 rounded-full bg-secondary px-3 py-1 text-sm text-muted-foreground"
-                            >
-                              {f.label}
-                              <button onClick={f.remove} className="text-muted-foreground hover:text-foreground transition-colors">
-                                <X className="h-3 w-3" />
-                              </button>
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                      <button
-                        onClick={clearAll}
-                        className="text-sm text-muted-foreground underline underline-offset-4 hover:text-foreground transition-colors"
-                      >
-                        Alles löschen
-                      </button>
-                    </div>
-                  )}
-
                   <div className="border-t border-border pt-4" />
 
                   {/* Belastung */}
