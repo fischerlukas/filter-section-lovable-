@@ -176,8 +176,8 @@ export default function ShelfConfigurator() {
             {/* Bild oben auf Mobile/Tablet */}
             <div className="w-full lg:hidden flex flex-col items-center justify-center p-6 sm:p-8 gap-4">
               <img src={shelfIllustration} alt="Regal-Illustration mit Höhe, Länge, Tiefe und Ebenen" className="w-full max-w-xs object-contain" />
-              {/* Titel auf Smartphone */}
-              <div className="flex sm:hidden items-center gap-3 w-full justify-center">
+              {/* Titel auf Tablet (sm), nicht auf Smartphone */}
+              <div className="hidden sm:flex lg:hidden items-center gap-3 w-full justify-center">
                 <SlidersHorizontal className="h-5 w-5 text-primary" />
                 <h1 className="text-lg font-semibold text-foreground">Wähle dein Palettenregal</h1>
               </div>
