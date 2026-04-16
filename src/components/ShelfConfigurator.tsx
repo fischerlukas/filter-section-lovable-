@@ -150,7 +150,7 @@ export default function ShelfConfigurator() {
 
 
           <div className="flex flex-col lg:flex-row">
-            <div className="w-full lg:w-[55%] px-12 py-8 pb-12 space-y-6 border-r border-dashed border-border">
+            <div className="w-full lg:w-[50%] px-12 py-8 pb-12 space-y-6 border-r border-dashed border-border">
               <div>
                 <label className="text-xs font-semibold tracking-wider text-muted-foreground uppercase mb-3 block">
                   Belastung / Palette
