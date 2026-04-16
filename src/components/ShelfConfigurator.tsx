@@ -277,7 +277,7 @@ export default function ShelfConfigurator() {
               </div>
               <div className="flex flex-col items-center gap-3">
                 <div className="relative w-20 h-20 flex items-center justify-center">
-                  <span className="text-sm tracking-[0.1em] font-medium text-muted-foreground/60">EU</span>
+                  <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-sm tracking-[0.1em] font-medium text-muted-foreground/60">EU</span>
                   {[...Array(12)].map((_, i) => {
                     const angle = (i * 30 - 90) * (Math.PI / 180);
                     const x = 50 + 42 * Math.cos(angle);
