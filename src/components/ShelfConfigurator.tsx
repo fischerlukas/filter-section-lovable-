@@ -184,7 +184,7 @@ export default function ShelfConfigurator() {
                       <button
                         key={opt}
                         onClick={() => setLoadsSelected(loadsSelected === opt ? null : opt)}
-                        className={`group relative flex w-full sm:flex-1 items-center gap-1.5 sm:gap-2 pl-2 sm:pl-2.5 pr-3 sm:pr-4 py-1.5 sm:py-2 rounded-full border-2 transition-all text-xs sm:text-sm ${
+                        className={`group relative flex w-full sm:flex-1 items-center justify-center gap-1.5 sm:gap-2 px-4 py-3 sm:py-2 rounded-full border-2 transition-all text-sm ${
                           isActive
                             ? "bg-primary text-primary-foreground shadow-lg border-primary"
                             : "bg-secondary text-muted-foreground hover:bg-muted hover:text-foreground border-border hover:border-muted-foreground/40"
