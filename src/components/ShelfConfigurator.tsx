@@ -300,7 +300,7 @@ export default function ShelfConfigurator() {
 
       </div>
 
-      <div className="flex flex-col items-center gap-3 mt-6 max-w-5xl w-full relative z-10">
+      <div className="flex flex-col items-center gap-3 mt-2 max-w-5xl w-full relative z-10">
         {allFilters.length > 0 && (
           <>
             <p className="text-sm text-muted-foreground">
