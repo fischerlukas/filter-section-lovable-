@@ -91,7 +91,7 @@ function MultiSelectDropdown({ label, selected, options, onChange }: MultiSelect
 }
 
 export default function ShelfConfigurator() {
-  const [collapsed, setCollapsed] = useState(false);
+  
   const [loadsSelected, setLoadsSelected] = useState<Set<string>>(new Set());
   const [widthSelected, setWidthSelected] = useState<Set<string>>(new Set());
   const [heightSelected, setHeightSelected] = useState<Set<string>>(new Set());
@@ -120,7 +120,7 @@ export default function ShelfConfigurator() {
           </div>
         </div>
 
-        {!collapsed && (
+        {(
           <div className="flex flex-col lg:flex-row">
             <div className="flex-1 px-12 py-8 pb-12 space-y-6 border-r border-dashed border-border">
               <div>
