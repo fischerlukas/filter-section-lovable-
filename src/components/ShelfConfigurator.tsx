@@ -168,16 +168,11 @@ export default function ShelfConfigurator() {
                 </label>
                 <div className="flex flex-wrap items-center gap-2">
                   {loadOptions.map((opt) => {
-                    const isActive = loadsSelected.has(opt);
+                    const isActive = loadsSelected === opt;
                     return (
                       <button
                         key={opt}
-                        onClick={() => {
-                          setLoadsSelected((prev) => {
-                            if (prev.has(opt)) return new Set();
-                            return new Set([opt]);
-                          });
-                        }}
+                        onClick={() => setLoadsSelected(loadsSelected === opt ? null : opt)}
                         className={`group relative flex items-center gap-2 pl-2.5 pr-4 py-2 rounded-full border-2 transition-all ${
                           isActive
                             ? "bg-primary text-primary-foreground shadow-lg border-primary"
