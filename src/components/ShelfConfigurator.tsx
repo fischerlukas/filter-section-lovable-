@@ -165,13 +165,13 @@ export default function ShelfConfigurator() {
               </div>
 
               <div className="grid grid-cols-2 gap-4">
-                <StyledNativeSelect label="Breite" value={width} options={widthOptions} onChange={setWidth} />
-                <StyledNativeSelect label="Höhe" value={height} options={heightOptions} onChange={setHeight} />
+                <MultiSelectDropdown label="Breite" selected={widthSelected} options={widthOptions} onChange={setWidthSelected} />
+                <MultiSelectDropdown label="Höhe" selected={heightSelected} options={heightOptions} onChange={setHeightSelected} />
               </div>
 
               <div className="grid grid-cols-2 gap-4">
-                <StyledNativeSelect label="Tiefe" value={depth} options={depthOptions} onChange={setDepth} />
-                <StyledNativeSelect label="Anzahl Ebenen" value={levels} options={levelOptions} onChange={setLevels} />
+                <MultiSelectDropdown label="Tiefe" selected={depthSelected} options={depthOptions} onChange={setDepthSelected} />
+                <MultiSelectDropdown label="Anzahl Ebenen" selected={levelsSelected} options={levelOptions} onChange={setLevelsSelected} />
               </div>
 
               <div>
