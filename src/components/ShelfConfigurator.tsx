@@ -18,26 +18,22 @@ const surfaceOptions: { id: SurfaceType; label: string; sub: string; price: stri
   { id: "wood", label: "Holzboden", sub: "Spanplatte", price: "41,80 €" },
 ];
 
-type MultiSelectProps = {
+type SingleSelectProps = {
   label: string;
-  selected: Set<string>;
+  selected: string | null;
   options: string[];
-  onChange: (selected: Set<string>) => void;
+  onChange: (selected: string | null) => void;
 };
 
-function MultiSelectDropdown({ label, selected, options, onChange }: MultiSelectProps) {
+function SingleSelectDropdown({ label, selected, options, onChange }: SingleSelectProps) {
   const [open, setOpen] = useState(false);
 
   const toggle = (opt: string) => {
-    const next = new Set(selected);
-    if (next.has(opt)) next.delete(opt);
-    else next.add(opt);
-    onChange(next);
+    onChange(selected === opt ? null : opt);
+    setOpen(false);
   };
 
-  const displayText = selected.size > 0
-    ? Array.from(selected).join(", ")
-    : "auswählen";
+  const displayText = selected ?? "auswählen";
 
   return (
     <div className="relative">
@@ -51,7 +47,7 @@ function MultiSelectDropdown({ label, selected, options, onChange }: MultiSelect
           open ? "border-primary" : "border-input"
         }`}
       >
-        <span className={`truncate pr-2 ${selected.size > 0 ? "text-foreground" : "text-muted-foreground"}`}>
+        <span className={`truncate pr-2 ${selected ? "text-foreground" : "text-muted-foreground"}`}>
           {displayText}
         </span>
         <ChevronDown className={`h-4 w-4 shrink-0 text-muted-foreground transition-transform ${open ? "rotate-180" : ""}`} />
@@ -62,7 +58,7 @@ function MultiSelectDropdown({ label, selected, options, onChange }: MultiSelect
           <div className="absolute left-0 right-0 top-full z-20 mt-1 max-h-48 overflow-hidden rounded-2xl border border-border bg-card shadow-lg">
             <div className="overflow-auto max-h-48 p-1 scrollbar-thin">
             {options.map((opt) => {
-              const isSelected = selected.has(opt);
+              const isSelected = selected === opt;
               return (
                 <button
                   key={opt}
@@ -74,7 +70,7 @@ function MultiSelectDropdown({ label, selected, options, onChange }: MultiSelect
                       : "text-muted-foreground hover:bg-muted hover:text-foreground"
                   }`}
                 >
-                  <div className={`flex size-5 shrink-0 items-center justify-center rounded-md border transition-colors ${
+                  <div className={`flex size-5 shrink-0 items-center justify-center rounded-full border transition-colors ${
                     isSelected ? "border-primary bg-primary" : "border-border bg-card"
                   }`}>
                     {isSelected && <Check className="h-3 w-3 text-primary-foreground" />}
