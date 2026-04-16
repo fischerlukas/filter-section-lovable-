@@ -142,10 +142,10 @@ export default function ShelfConfigurator() {
       >
         <defs>
           <filter id="innerShadow">
-            <feGaussianBlur in="SourceAlpha" stdDeviation="8" result="blur" />
-            <feOffset in="blur" dx="0" dy="4" result="offsetBlur" />
+            <feGaussianBlur in="SourceAlpha" stdDeviation="18" result="blur" />
+            <feOffset in="blur" dx="0" dy="8" result="offsetBlur" />
             <feComposite in="offsetBlur" in2="SourceGraphic" operator="arithmetic" k2="-1" k3="1" result="innerShadow" />
-            <feFlood floodColor="rgba(0,0,0,0.12)" result="color" />
+            <feFlood floodColor="rgba(0,0,0,0.18)" result="color" />
             <feComposite in="color" in2="innerShadow" operator="in" result="shadow" />
             <feComposite in="shadow" in2="SourceGraphic" operator="over" />
           </filter>
