@@ -72,6 +72,9 @@ function CustomSelect({ label, value, options, onChange }: CustomSelectProps) {
         <button
           ref={triggerRef}
           type="button"
+          aria-expanded={open}
+          aria-haspopup="listbox"
+          onMouseDown={(event) => event.preventDefault()}
           onClick={() => setOpen(!open)}
           className="flex h-10 w-full items-center justify-between rounded-full border border-input bg-card px-5 text-sm transition-colors hover:border-muted-foreground/50"
         >
@@ -89,6 +92,7 @@ function CustomSelect({ label, value, options, onChange }: CustomSelectProps) {
               <button
                 key={option}
                 type="button"
+                onMouseDown={(event) => event.preventDefault()}
                 onClick={() => {
                   onChange(option);
                   setOpen(false);
