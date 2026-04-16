@@ -243,7 +243,7 @@ export default function ShelfConfigurator() {
                       <div className="text-sm font-medium text-foreground">{s.label}</div>
                       <div className="text-xs text-muted-foreground">{s.sub}</div>
                       <div className={`text-sm font-semibold mt-1 ${surfaces_selected.has(s.id) ? "text-primary" : "text-foreground"}`}>
-                        {s.price}
+                        {s.id !== "none" ? `ab ${s.price}` : s.price}
                       </div>
                     </button>
                   ))}
