@@ -116,7 +116,7 @@ export default function ShelfConfigurator() {
         <div className="flex items-center justify-center px-12 pt-10 pb-6 border-b border-dashed border-border">
           <div className="flex items-center gap-3">
             <SlidersHorizontal className="h-5 w-5 text-primary" />
-            <h1 className="text-xl font-semibold text-foreground">Palettenregal konfigurieren</h1>
+            <h1 className="text-xl font-semibold text-foreground">Wähle dein Palettenregal</h1>
           </div>
         </div>
 
