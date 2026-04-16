@@ -60,7 +60,7 @@ export default function ShelfConfigurator() {
   const [height, setHeight] = useState("");
   const [depth, setDepth] = useState("");
   const [levels, setLevels] = useState("");
-  const [surface, setSurface] = useState<SurfaceType | null>(null);
+  const [surfaces_selected, setSurfacesSelected] = useState<Set<SurfaceType>>(new Set());
   const [activeTab, setActiveTab] = useState<"config" | "accessories" | "faq">("config");
 
   return (
@@ -132,9 +132,16 @@ export default function ShelfConfigurator() {
                   {surfaces.map((s) => (
                     <button
                       key={s.id}
-                      onClick={() => setSurface(surface === s.id ? null : s.id)}
+                      onClick={() => {
+                        setSurfacesSelected((prev) => {
+                          const next = new Set(prev);
+                          if (next.has(s.id)) next.delete(s.id);
+                          else next.add(s.id);
+                          return next;
+                        });
+                      }}
                       className={`rounded-xl border-2 p-4 text-left transition-all ${
-                        surface === s.id
+                        surfaces_selected.has(s.id)
                           ? "border-primary bg-primary/5"
                           : "border-transparent bg-secondary hover:border-muted-foreground/30"
                       }`}
@@ -142,7 +149,7 @@ export default function ShelfConfigurator() {
                       <div className="h-10 w-10 rounded bg-muted mb-3" />
                       <div className="text-sm font-medium text-foreground">{s.label}</div>
                       <div className="text-xs text-muted-foreground">{s.sub}</div>
-                      <div className={`text-sm font-semibold mt-1 ${surface === s.id ? "text-primary" : "text-foreground"}`}>
+                      <div className={`text-sm font-semibold mt-1 ${surfaces_selected.has(s.id) ? "text-primary" : "text-foreground"}`}>
                         {s.price}
                       </div>
                     </button>
