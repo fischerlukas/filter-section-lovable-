@@ -1,5 +1,4 @@
-import { useState, useRef, useEffect } from "react";
-import { createPortal } from "react-dom";
+import { useState } from "react";
 import { ChevronDown, ChevronUp, ArrowRight, SlidersHorizontal } from "lucide-react";
 
 const loadOptions = ["500 kg", "1.000 kg", "1.500 kg"];
@@ -11,17 +10,11 @@ const levelOptions = ["2", "3", "4", "5", "6"];
 
 type SurfaceType = "none" | "wire" | "wood";
 
-type CustomSelectProps = {
+type StyledNativeSelectProps = {
   label: string;
   value: string;
   options: string[];
   onChange: (value: string) => void;
-};
-
-type MenuPosition = {
-  top: number;
-  left: number;
-  width: number;
 };
 
 const surfaces: { id: SurfaceType; label: string; sub: string; price: string }[] = [
@@ -30,83 +23,31 @@ const surfaces: { id: SurfaceType; label: string; sub: string; price: string }[]
   { id: "wood", label: "Holzboden", sub: "Spanplatte", price: "91,71 €" },
 ];
 
-function CustomSelect({ label, value, options, onChange }: CustomSelectProps) {
-  const [open, setOpen] = useState(false);
-  const [menuPosition, setMenuPosition] = useState<MenuPosition | null>(null);
-  const ref = useRef<HTMLDivElement>(null);
-  const triggerRef = useRef<HTMLButtonElement>(null);
-
-  useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
-      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
-
-  useEffect(() => {
-    if (!open) return;
-
-    const updateMenuPosition = () => {
-      const rect = triggerRef.current?.getBoundingClientRect();
-      if (!rect) return;
-      setMenuPosition({ top: rect.bottom + 6, left: rect.left, width: rect.width });
-    };
-
-    updateMenuPosition();
-    window.addEventListener("resize", updateMenuPosition);
-    window.addEventListener("scroll", updateMenuPosition, true);
-
-    return () => {
-      window.removeEventListener("resize", updateMenuPosition);
-      window.removeEventListener("scroll", updateMenuPosition, true);
-    };
-  }, [open]);
-
+function StyledNativeSelect({ label, value, options, onChange }: StyledNativeSelectProps) {
   return (
     <div>
-      <label className="text-xs font-semibold tracking-wider text-muted-foreground uppercase mb-2 block">
+      <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-muted-foreground">
         {label}
       </label>
-      <div className="relative" ref={ref}>
-        <button
-          ref={triggerRef}
-          type="button"
-          aria-expanded={open}
-          aria-haspopup="listbox"
-          onMouseDown={(event) => event.preventDefault()}
-          onClick={() => setOpen(!open)}
-          className="flex h-10 w-full items-center justify-between rounded-full border border-input bg-card px-5 text-sm transition-colors hover:border-muted-foreground/50"
-        >
+      <div className="group relative">
+        <div className="pointer-events-none flex h-11 w-full items-center justify-between rounded-full border border-input bg-card px-5 text-sm shadow-sm transition-colors group-hover:border-muted-foreground/40 group-focus-within:border-primary">
           <span className={value ? "text-foreground" : "text-muted-foreground"}>
             {value || "auswählen"}
           </span>
-          <ChevronDown className={`h-4 w-4 text-muted-foreground transition-transform ${open ? "rotate-180" : ""}`} />
-        </button>
-        {open && menuPosition && createPortal(
-          <div
-            className="fixed z-[100] rounded-2xl border border-input bg-card py-1.5 shadow-lg animate-in fade-in-0 zoom-in-95 duration-150"
-            style={{ top: menuPosition.top, left: menuPosition.left, width: menuPosition.width }}
-          >
-            {options.map((option) => (
-              <button
-                key={option}
-                type="button"
-                onMouseDown={(event) => event.preventDefault()}
-                onClick={() => {
-                  onChange(option);
-                  setOpen(false);
-                }}
-                className={`flex w-full items-center px-5 py-2 text-sm transition-colors hover:bg-secondary ${
-                  value === option ? "text-primary font-medium" : "text-foreground"
-                }`}
-              >
-                {option}
-              </button>
-            ))}
-          </div>,
-          document.body,
-        )}
+          <ChevronDown className="h-4 w-4 text-muted-foreground transition-colors group-focus-within:text-foreground" />
+        </div>
+        <select
+          value={value}
+          onChange={(event) => onChange(event.target.value)}
+          className="absolute inset-0 h-full w-full cursor-pointer appearance-none rounded-full opacity-0"
+        >
+          <option value="">auswählen</option>
+          {options.map((option) => (
+            <option key={option} value={option}>
+              {option}
+            </option>
+          ))}
+        </select>
       </div>
     </div>
   );
@@ -174,13 +115,13 @@ export default function ShelfConfigurator() {
               </div>
 
               <div className="grid grid-cols-2 gap-4">
-                <CustomSelect label="Breite" value={width} options={widthOptions} onChange={setWidth} />
-                <CustomSelect label="Höhe" value={height} options={heightOptions} onChange={setHeight} />
+                <StyledNativeSelect label="Breite" value={width} options={widthOptions} onChange={setWidth} />
+                <StyledNativeSelect label="Höhe" value={height} options={heightOptions} onChange={setHeight} />
               </div>
 
               <div className="grid grid-cols-2 gap-4">
-                <CustomSelect label="Tiefe" value={depth} options={depthOptions} onChange={setDepth} />
-                <CustomSelect label="Anzahl Ebenen" value={levels} options={levelOptions} onChange={setLevels} />
+                <StyledNativeSelect label="Tiefe" value={depth} options={depthOptions} onChange={setDepth} />
+                <StyledNativeSelect label="Anzahl Ebenen" value={levels} options={levelOptions} onChange={setLevels} />
               </div>
 
               <div>
