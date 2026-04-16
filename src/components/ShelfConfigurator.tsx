@@ -273,10 +273,10 @@ export default function ShelfConfigurator() {
             </div>
 
             <div className="w-full lg:w-[40%] flex flex-col items-center justify-center p-12 gap-6">
-              <img src={shelfIllustration} alt="Regal-Illustration mit Höhe, Länge, Tiefe und Ebenen" className="w-full max-w-[280px] object-contain" />
-              <div className="flex flex-col items-center gap-3">
-                <div className="relative w-20 h-20 flex items-center justify-center">
-                  <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-sm tracking-[0.1em] font-medium text-muted-foreground/60">EU</span>
+              <img src={shelfIllustration} alt="Regal-Illustration mit Höhe, Länge, Tiefe und Ebenen" className="w-full max-w-[380px] object-contain" />
+              <div className="flex flex-col items-center gap-1.5">
+                <div className="relative w-12 h-12 flex items-center justify-center">
+                  <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[10px] tracking-[0.1em] font-medium text-muted-foreground/50">EU</span>
                   {[...Array(12)].map((_, i) => {
                     const angle = (i * 30 - 90) * (Math.PI / 180);
                     const x = 50 + 42 * Math.cos(angle);
@@ -284,7 +284,7 @@ export default function ShelfConfigurator() {
                     return (
                       <span
                         key={i}
-                        className="absolute text-[7px] text-muted-foreground/40"
+                        className="absolute text-[5px] text-muted-foreground/30"
                         style={{
                           left: `${x}%`,
                           top: `${y}%`,
@@ -297,7 +297,7 @@ export default function ShelfConfigurator() {
                     );
                   })}
                 </div>
-                <span className="text-[10px] tracking-[0.3em] uppercase font-semibold text-muted-foreground/50">Made in Europe</span>
+                <span className="text-[8px] tracking-[0.25em] uppercase font-semibold text-muted-foreground/40">Made in Europe</span>
               </div>
             </div>
           </div>
