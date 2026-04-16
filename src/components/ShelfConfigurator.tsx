@@ -144,8 +144,9 @@ export default function ShelfConfigurator() {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-4 relative overflow-hidden" style={{ background: 'linear-gradient(to bottom, hsl(0 0% 96%) 0%, hsl(0 0% 100%) 50%)' }}>
       <svg
-        className="absolute inset-0 w-full h-full pointer-events-none"
-        viewBox="0 0 1440 900"
+        className="absolute top-0 left-0 w-full pointer-events-none"
+        style={{ height: '500px' }}
+        viewBox="0 0 1440 500"
         preserveAspectRatio="none"
       >
         <path
