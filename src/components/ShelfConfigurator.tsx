@@ -91,9 +91,23 @@ function MultiSelectDropdown({ label, selected, options, onChange }: MultiSelect
   );
 }
 
+const sortOptions = [
+  "Ausgewählt",
+  "Am relevantesten",
+  "meistverkauft",
+  "Alphabetisch, A-Z",
+  "Alphabetisch, Z-A",
+  "Preis, niedrig nach hoch",
+  "Preis, hoch nach niedrig",
+  "Datum, alt zu neu",
+  "Datum, neu zu alt",
+];
+
 export default function ShelfConfigurator() {
   
   const [loadsSelected, setLoadsSelected] = useState<Set<string>>(new Set());
+  const [sortBy, setSortBy] = useState("Ausgewählt");
+  const [sortOpen, setSortOpen] = useState(false);
   const [widthSelected, setWidthSelected] = useState<Set<string>>(new Set());
   const [heightSelected, setHeightSelected] = useState<Set<string>>(new Set());
   const [depthSelected, setDepthSelected] = useState<Set<string>>(new Set());
