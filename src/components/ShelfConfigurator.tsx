@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Check } from "lucide-react";
+import { useState, useMemo } from "react";
+import { Check, X } from "lucide-react";
 import { ChevronDown, ArrowRight, SlidersHorizontal } from "lucide-react";
 
 const loadOptions = ["500 kg", "1.000 kg", "1.500 kg"];
