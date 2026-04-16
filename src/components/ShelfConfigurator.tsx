@@ -277,13 +277,13 @@ export default function ShelfConfigurator() {
               </div>
               <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-secondary">
                 <svg width="20" height="20" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <circle cx="30" cy="30" r="28" fill="#003399"/>
+                  <circle cx="30" cy="30" r="28" stroke="currentColor" strokeWidth="2" fill="none" className="text-muted-foreground"/>
                   <g>
                     {[...Array(12)].map((_, i) => {
                       const angle = (i * 30 - 90) * (Math.PI / 180);
                       const x = 30 + 20 * Math.cos(angle);
                       const y = 30 + 20 * Math.sin(angle);
-                      return <circle key={i} cx={x} cy={y} r="2" fill="#FFCC00"/>;
+                      return <circle key={i} cx={x} cy={y} r="2" fill="currentColor" className="text-muted-foreground"/>;
                     })}
                   </g>
                 </svg>
