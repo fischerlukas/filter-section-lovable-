@@ -60,7 +60,7 @@ export default function ShelfConfigurator() {
   const [height, setHeight] = useState("");
   const [depth, setDepth] = useState("");
   const [levels, setLevels] = useState("");
-  const [surface, setSurface] = useState<SurfaceType>("none");
+  const [surface, setSurface] = useState<SurfaceType | null>(null);
   const [activeTab, setActiveTab] = useState<"config" | "accessories" | "faq">("config");
 
   return (
@@ -132,7 +132,7 @@ export default function ShelfConfigurator() {
                   {surfaces.map((s) => (
                     <button
                       key={s.id}
-                      onClick={() => setSurface(surface === s.id ? "none" : s.id)}
+                      onClick={() => setSurface(surface === s.id ? null : s.id)}
                       className={`rounded-xl border-2 p-4 text-left transition-all ${
                         surface === s.id
                           ? "border-primary bg-primary/5"
