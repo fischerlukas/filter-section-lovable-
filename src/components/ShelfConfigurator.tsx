@@ -120,7 +120,8 @@ export default function ShelfConfigurator() {
           </div>
         </div>
 
-        {(
+
+
           <div className="flex flex-col lg:flex-row">
             <div className="flex-1 px-12 py-8 pb-12 space-y-6 border-r border-dashed border-border">
               <div>
@@ -249,7 +250,8 @@ export default function ShelfConfigurator() {
               </div>
             </div>
           </div>
-        )}
+
+
       </div>
     </div>
   );
