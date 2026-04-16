@@ -114,7 +114,7 @@ export default function ShelfConfigurator() {
                         }}
                         className={`group relative flex items-center gap-3 pl-3 pr-6 py-3 rounded-full transition-all ${
                           isActive
-                            ? "bg-primary text-primary-foreground shadow-lg ring-2 ring-primary ring-offset-2 ring-offset-card"
+                            ? "bg-primary text-primary-foreground shadow-lg"
                             : "bg-secondary text-muted-foreground hover:bg-muted hover:text-foreground ring-1 ring-border hover:ring-muted-foreground/40"
                         }`}
                       >
