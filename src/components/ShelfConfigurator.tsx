@@ -143,7 +143,7 @@ export default function ShelfConfigurator() {
   return (
     <div className="min-h-screen flex flex-col items-center sm:justify-center p-0 sm:p-4 relative overflow-hidden" style={{ background: 'linear-gradient(to bottom, hsl(0 0% 96%) 0%, hsl(0 0% 100%) 50%)' }}>
       <svg
-        className={`absolute top-0 left-0 w-full pointer-events-none ${!mobileConfigOpen ? "hidden sm:block" : ""}`}
+        className="absolute top-0 left-0 w-full pointer-events-none"
         style={{ height: '500px' }}
         viewBox="0 0 1440 500"
         preserveAspectRatio="none"
@@ -172,24 +172,188 @@ export default function ShelfConfigurator() {
           </div>
         </div>
 
-
-
           <div className="flex flex-col lg:flex-row">
             {/* Bild oben auf Mobile/Tablet */}
-            <div className={`w-full lg:hidden flex flex-col items-center justify-center p-6 sm:p-8 gap-4 border-b border-dashed border-border ${!mobileConfigOpen ? "pb-8 mb-2 sm:mb-0 sm:pb-8" : ""}`}>
+            <div className="w-full lg:hidden flex flex-col items-center justify-center p-6 sm:p-8 gap-4">
               <img src={shelfIllustration} alt="Regal-Illustration mit Höhe, Länge, Tiefe und Ebenen" className="w-full max-w-xs object-contain" />
-              {/* Titel unter dem Bild nur auf Smartphone - klickbar zum Einklappen */}
-              <button
-                onClick={() => setMobileConfigOpen(!mobileConfigOpen)}
-                className="flex sm:hidden items-center gap-3 w-full justify-center"
-              >
+              {/* Titel auf Smartphone */}
+              <div className="flex sm:hidden items-center gap-3 w-full justify-center">
                 <SlidersHorizontal className="h-5 w-5 text-primary" />
                 <h1 className="text-lg font-semibold text-foreground">Wähle dein Palettenregal</h1>
-                <ChevronDown className={`h-4 w-4 text-muted-foreground transition-transform duration-300 ${mobileConfigOpen ? "rotate-180" : ""}`} />
-              </button>
+              </div>
             </div>
 
-            <div className={`w-full lg:w-[50%] px-6 sm:px-12 py-6 sm:py-8 pb-8 sm:pb-12 space-y-6 lg:border-r border-dashed border-border sm:!block ${mobileConfigOpen ? "block" : "hidden sm:block"}`}>
+            {/* Mobile: "Filtern und sortieren" Button + Produktanzahl */}
+            <div className="sm:hidden w-full px-6 pb-6 flex items-center gap-4">
+              <button
+                onClick={() => setMobileFilterOpen(true)}
+                className="rounded-full border border-border px-5 py-3 text-sm font-medium text-foreground hover:bg-secondary transition-colors whitespace-nowrap"
+              >
+                Filtern und sortieren
+              </button>
+              <span className="text-sm text-muted-foreground">
+                {filteredCount} {allFilters.length > 0 ? `von ${totalProducts}` : ""} Produkte werden angezeigt
+              </span>
+            </div>
+
+            {/* Mobile Filter Sheet */}
+            <Sheet open={mobileFilterOpen} onOpenChange={setMobileFilterOpen}>
+              <SheetContent side="bottom" className="h-[90vh] rounded-t-2xl overflow-y-auto p-0">
+                <SheetHeader className="sticky top-0 bg-card z-10 flex flex-row items-center justify-between px-6 py-4 border-b border-border">
+                  <SheetTitle className="text-base font-semibold uppercase tracking-wider">Filtern und Sortieren</SheetTitle>
+                  <SheetClose className="rounded-full p-1 hover:bg-muted transition-colors">
+                    <X className="h-5 w-5" />
+                  </SheetClose>
+                </SheetHeader>
+
+                <div className="px-6 py-6 space-y-6">
+                  {/* Sortieren */}
+                  <div>
+                    <label className="text-sm font-semibold text-foreground mb-2 block">Sortieren nach:</label>
+                    <div className="relative">
+                      <button
+                        type="button"
+                        onClick={() => setSortOpen(!sortOpen)}
+                        className={`flex h-11 w-full items-center justify-between rounded-full border bg-card px-5 text-sm shadow-sm transition-colors ${
+                          sortOpen ? "border-primary" : "border-input"
+                        }`}
+                      >
+                        <span className="text-foreground">{sortBy}</span>
+                        <ChevronDown className={`h-4 w-4 text-muted-foreground transition-transform ${sortOpen ? "rotate-180" : ""}`} />
+                      </button>
+                      {sortOpen && (
+                        <div className="absolute left-0 right-0 top-full z-20 mt-1 max-h-48 overflow-auto rounded-2xl border border-border bg-card shadow-lg p-1">
+                          {sortOptions.map((opt) => (
+                            <button
+                              key={opt}
+                              type="button"
+                              onClick={() => { setSortBy(opt); setSortOpen(false); }}
+                              className={`flex w-full items-center gap-2 rounded-xl px-4 py-2.5 text-sm transition-colors ${
+                                sortBy === opt
+                                  ? "bg-primary/10 text-foreground font-medium"
+                                  : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                              }`}
+                            >
+                              {sortBy === opt && <Check className="h-3.5 w-3.5 text-primary" />}
+                              {opt}
+                            </button>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Aktive Filter */}
+                  {allFilters.length > 0 && (
+                    <div className="border-t border-border pt-4">
+                      <div className="flex items-center gap-2 mb-2">
+                        <span className="text-sm font-semibold text-foreground">Aktive Filter:</span>
+                        <div className="flex flex-wrap gap-2">
+                          {allFilters.map((f, i) => (
+                            <span
+                              key={i}
+                              className="inline-flex items-center gap-1.5 rounded-full bg-secondary px-3 py-1 text-sm text-muted-foreground"
+                            >
+                              {f.label}
+                              <button onClick={f.remove} className="text-muted-foreground hover:text-foreground transition-colors">
+                                <X className="h-3 w-3" />
+                              </button>
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                      <button
+                        onClick={clearAll}
+                        className="text-sm text-muted-foreground underline underline-offset-4 hover:text-foreground transition-colors"
+                      >
+                        Alles löschen
+                      </button>
+                    </div>
+                  )}
+
+                  <div className="border-t border-border pt-4" />
+
+                  {/* Belastung */}
+                  <div>
+                    <label className="text-xs font-semibold tracking-wider text-muted-foreground uppercase mb-3 block">
+                      Belastung pro Palette
+                    </label>
+                    <div className="flex flex-col items-stretch gap-2">
+                      {loadOptions.map((opt) => {
+                        const isActive = loadsSelected === opt;
+                        return (
+                          <button
+                            key={opt}
+                            onClick={() => setLoadsSelected(loadsSelected === opt ? null : opt)}
+                            className={`group relative flex w-full items-center justify-center gap-1.5 px-4 py-3 rounded-full border-2 transition-all text-sm ${
+                              isActive
+                                ? "bg-primary text-primary-foreground shadow-lg border-primary"
+                                : "bg-secondary text-muted-foreground hover:bg-muted hover:text-foreground border-border hover:border-muted-foreground/40"
+                            }`}
+                          >
+                            <div className={`flex size-4 shrink-0 items-center justify-center rounded-full shadow-sm ${
+                              isActive ? "bg-white" : "bg-muted ring-1 ring-border"
+                            }`}>
+                              {isActive ? (
+                                <Check className="h-3 w-3 text-primary" />
+                              ) : (
+                                <div className="size-2 rounded-full bg-muted-foreground/30" />
+                              )}
+                            </div>
+                            <span className="text-xs tabular-nums tracking-wide font-bold">
+                              {opt}
+                            </span>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+
+                  {/* Dropdowns */}
+                  <div className="grid grid-cols-2 gap-4">
+                    <SingleSelectDropdown label="Breite" selected={widthSelected} options={widthOptions} onChange={setWidthSelected} />
+                    <SingleSelectDropdown label="Höhe" selected={heightSelected} options={heightOptions} onChange={setHeightSelected} />
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-4">
+                    <SingleSelectDropdown label="Tiefe" selected={depthSelected} options={depthOptions} onChange={setDepthSelected} />
+                    <SingleSelectDropdown label="Anzahl Ebenen" selected={levelsSelected} options={levelOptions} onChange={setLevelsSelected} />
+                  </div>
+
+                  {/* Auflage */}
+                  <div>
+                    <label className="text-xs font-semibold tracking-wider text-muted-foreground uppercase mb-3 block">
+                      Auflage
+                    </label>
+                    <div className="grid grid-cols-1 gap-3">
+                      {surfaceOptions.map((s) => (
+                        <button
+                          key={s.id}
+                          onClick={() => setSurfaceSelected(surfaceSelected === s.id ? null : s.id)}
+                          className={`rounded-xl border-2 p-3 text-left transition-all flex flex-row items-center gap-3 ${
+                            surfaceSelected === s.id
+                              ? "border-primary bg-primary/5"
+                              : "border-transparent bg-secondary hover:border-muted-foreground/30"
+                          }`}
+                        >
+                          <div className="flex-1">
+                            <div className="text-sm font-medium text-foreground">{s.label}</div>
+                            <div className="text-xs text-muted-foreground">{s.sub}</div>
+                            <div className={`text-sm font-semibold mt-1 ${surfaceSelected === s.id ? "text-primary" : "text-foreground"}`}>
+                              {s.id !== "none" ? `ab ${s.price}` : s.price}
+                            </div>
+                          </div>
+                          <div className="h-10 w-10 rounded bg-muted shrink-0" />
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </SheetContent>
+            </Sheet>
+
+            {/* Desktop/Tablet: inline config (unchanged) */}
+            <div className="w-full lg:w-[50%] px-6 sm:px-12 py-6 sm:py-8 pb-8 sm:pb-12 space-y-6 lg:border-r border-dashed border-border hidden sm:block">
               <div>
                 <label className="text-xs font-semibold tracking-wider text-muted-foreground uppercase mb-3 block">
                   Belastung pro Palette
@@ -282,7 +446,6 @@ export default function ShelfConfigurator() {
                   </span>
                 </button>
               </div>
-              <div className="border-t border-dashed border-border mt-2 sm:hidden" />
             </div>
 
             <div className="hidden lg:flex w-full lg:w-[50%] flex-col items-center justify-center p-12 gap-6">
