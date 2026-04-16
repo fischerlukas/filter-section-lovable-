@@ -169,12 +169,12 @@ export default function ShelfConfigurator() {
 
           <div className="flex flex-col lg:flex-row">
             {/* Bild oben auf Mobile/Tablet */}
-            <div className="w-full lg:hidden flex flex-col items-center justify-center p-6 sm:p-8 gap-4 border-b border-dashed border-border">
+            <div className={`w-full lg:hidden flex flex-col items-center justify-center p-6 sm:p-8 gap-4 border-b border-dashed border-border ${!mobileConfigOpen ? "pb-10 sm:pb-8" : ""}`}>
               <img src={shelfIllustration} alt="Regal-Illustration mit Höhe, Länge, Tiefe und Ebenen" className="w-full max-w-xs object-contain" />
               {/* Titel unter dem Bild nur auf Smartphone - klickbar zum Einklappen */}
               <button
                 onClick={() => setMobileConfigOpen(!mobileConfigOpen)}
-                className={`flex sm:hidden items-center gap-3 w-full justify-center ${!mobileConfigOpen ? "mb-4" : ""}`}
+                className="flex sm:hidden items-center gap-3 w-full justify-center"
               >
                 <SlidersHorizontal className="h-5 w-5 text-primary" />
                 <h1 className="text-lg font-semibold text-foreground">Wähle dein Palettenregal</h1>
