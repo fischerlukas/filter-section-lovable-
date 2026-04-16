@@ -187,9 +187,9 @@ export default function ShelfConfigurator() {
             <div className="sm:hidden w-full px-6 pb-6 flex flex-col items-stretch gap-3 min-h-[88px]">
               <button
                 onClick={() => setMobileFilterOpen(true)}
-                className="w-full rounded-full border border-border px-5 py-3 text-sm font-medium text-foreground hover:bg-secondary transition-colors text-center inline-flex items-center justify-center gap-2"
+                className="group w-full rounded-full bg-primary px-5 py-3.5 text-sm font-medium text-primary-foreground text-center inline-flex items-center justify-center gap-2 shadow-[0_18px_40px_-8px_hsl(var(--primary)/0.55)] transition-all duration-300 hover:bg-primary/90 hover:shadow-[0_22px_50px_-6px_hsl(var(--primary)/0.7)] hover:-translate-y-0.5 active:translate-y-0 active:shadow-[0_10px_25px_-8px_hsl(var(--primary)/0.5)]"
               >
-                <SlidersHorizontal className="h-4 w-4 text-primary" />
+                <SlidersHorizontal className="h-4 w-4 transition-transform duration-300 group-hover:rotate-12" />
                 Wähle dein Palettenregal
               </button>
               <span className="text-sm text-muted-foreground text-center">
