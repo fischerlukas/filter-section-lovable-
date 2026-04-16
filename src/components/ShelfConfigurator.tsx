@@ -169,7 +169,7 @@ export default function ShelfConfigurator() {
 
           <div className="flex flex-col lg:flex-row">
             {/* Bild oben auf Mobile/Tablet */}
-            <div className={`w-full lg:hidden flex flex-col items-center justify-center p-6 sm:p-8 gap-4 border-b border-dashed border-border ${!mobileConfigOpen ? "mb-4 sm:mb-0" : ""}`}>
+            <div className={`w-full lg:hidden flex flex-col items-center justify-center p-6 sm:p-8 gap-4 border-b border-dashed border-border ${!mobileConfigOpen ? "pb-8 mb-2 sm:mb-0 sm:pb-8" : ""}`}>
               <img src={shelfIllustration} alt="Regal-Illustration mit Höhe, Länge, Tiefe und Ebenen" className="w-full max-w-xs object-contain" />
               {/* Titel unter dem Bild nur auf Smartphone - klickbar zum Einklappen */}
               <button
