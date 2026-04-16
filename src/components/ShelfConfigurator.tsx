@@ -304,7 +304,7 @@ export default function ShelfConfigurator() {
                         <button
                           key={s.id}
                           onClick={() => setSurfaceSelected(surfaceSelected === s.id ? null : s.id)}
-                          className={`rounded-xl border-2 p-3 pr-4 text-left transition-all flex flex-row items-center gap-3 ${
+                          className={`rounded-xl border-2 p-3 pr-6 text-left transition-all flex flex-row items-center gap-3 ${
                             surfaceSelected === s.id
                               ? "border-primary bg-primary/5"
                               : "border-transparent bg-secondary hover:border-muted-foreground/30"
