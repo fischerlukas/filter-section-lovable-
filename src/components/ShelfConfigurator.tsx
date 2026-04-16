@@ -150,7 +150,7 @@ export default function ShelfConfigurator() {
 
 
           <div className="flex flex-col lg:flex-row">
-            <div className="flex-1 px-12 py-8 pb-12 space-y-6 border-r border-dashed border-border">
+            <div className="w-full lg:w-[60%] px-12 py-8 pb-12 space-y-6 border-r border-dashed border-border">
               <div>
                 <label className="text-xs font-semibold tracking-wider text-muted-foreground uppercase mb-3 block">
                   Belastung / Palette
@@ -272,7 +272,7 @@ export default function ShelfConfigurator() {
               </div>
             </div>
 
-            <div className="w-full lg:w-80 flex flex-col items-center justify-center p-12 gap-6">
+            <div className="w-full lg:w-[40%] flex flex-col items-center justify-center p-12 gap-6">
               <img src={shelfIllustration} alt="Regal-Illustration mit Höhe, Länge, Tiefe und Ebenen" className="w-full max-w-[280px] object-contain" />
               <div className="flex flex-col items-center gap-3">
                 <div className="relative w-20 h-20 flex items-center justify-center">
