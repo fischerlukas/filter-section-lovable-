@@ -112,10 +112,10 @@ export default function ShelfConfigurator() {
                             return next;
                           });
                         }}
-                        className={`group relative flex items-center gap-3 pl-3 pr-6 py-3 rounded-full transition-all ${
+                        className={`group relative flex items-center gap-3 pl-3 pr-6 py-3 rounded-full border-2 transition-all ${
                           isActive
-                            ? "bg-primary text-primary-foreground shadow-lg"
-                            : "bg-secondary text-muted-foreground hover:bg-muted hover:text-foreground ring-1 ring-border hover:ring-muted-foreground/40"
+                            ? "bg-primary text-primary-foreground shadow-lg border-primary"
+                            : "bg-secondary text-muted-foreground hover:bg-muted hover:text-foreground border-border hover:border-muted-foreground/40"
                         }`}
                       >
                         <div className={`flex size-7 shrink-0 items-center justify-center rounded-full shadow-sm ${
