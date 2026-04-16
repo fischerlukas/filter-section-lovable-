@@ -272,8 +272,8 @@ export default function ShelfConfigurator() {
               </div>
             </div>
 
-            <div className="w-full lg:w-[40%] flex flex-col items-center justify-center p-12 gap-6">
-              <img src={shelfIllustration} alt="Regal-Illustration mit Höhe, Länge, Tiefe und Ebenen" className="w-full max-w-[380px] object-contain" />
+            <div className="w-full lg:w-[45%] flex flex-col items-center justify-center p-12 gap-6">
+              <img src={shelfIllustration} alt="Regal-Illustration mit Höhe, Länge, Tiefe und Ebenen" className="w-full object-contain" />
               <div className="flex flex-col items-center gap-1.5">
                 <div className="relative w-12 h-12 flex items-center justify-center">
                   <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[10px] tracking-[0.1em] font-medium text-muted-foreground/50">EU</span>
