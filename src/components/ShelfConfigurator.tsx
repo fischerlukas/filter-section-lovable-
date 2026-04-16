@@ -64,17 +64,12 @@ function SingleSelectDropdown({ label, selected, options, onChange }: SingleSele
                   key={opt}
                   type="button"
                   onClick={() => toggle(opt)}
-                  className={`flex w-full items-center gap-2 rounded-xl px-4 py-2.5 text-sm transition-colors ${
+                  className={`flex w-full items-center rounded-xl px-4 py-2.5 text-sm transition-colors ${
                     isSelected
                       ? "bg-primary/10 text-foreground font-medium"
                       : "text-muted-foreground hover:bg-muted hover:text-foreground"
                   }`}
                 >
-                  <div className={`flex size-5 shrink-0 items-center justify-center rounded-full border transition-colors ${
-                    isSelected ? "border-primary bg-primary" : "border-border bg-card"
-                  }`}>
-                    {isSelected && <Check className="h-3 w-3 text-primary-foreground" />}
-                  </div>
                   {opt}
                 </button>
               );
