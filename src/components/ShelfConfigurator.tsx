@@ -185,7 +185,7 @@ export default function ShelfConfigurator() {
                   Auflage
                 </label>
                 <div className="grid grid-cols-3 gap-3">
-                  {surfaces.map((s) => (
+                  {surfaceOptions.map((s) => (
                     <button
                       key={s.id}
                       onClick={() => {
