@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Check } from "lucide-react";
-import { ChevronDown, ChevronUp, ArrowRight, SlidersHorizontal } from "lucide-react";
+import { ChevronDown, ArrowRight, SlidersHorizontal } from "lucide-react";
 
 const loadOptions = ["500 kg", "1.000 kg", "1.500 kg"];
 
@@ -91,7 +91,7 @@ function MultiSelectDropdown({ label, selected, options, onChange }: MultiSelect
 }
 
 export default function ShelfConfigurator() {
-  const [collapsed, setCollapsed] = useState(false);
+  
   const [loadsSelected, setLoadsSelected] = useState<Set<string>>(new Set());
   const [widthSelected, setWidthSelected] = useState<Set<string>>(new Set());
   const [heightSelected, setHeightSelected] = useState<Set<string>>(new Set());
@@ -113,21 +113,15 @@ export default function ShelfConfigurator() {
         />
       </svg>
       <div className="bg-card shadow-lg max-w-5xl w-full relative z-10" style={{ borderRadius: "50px" }}>
-        <div className="flex items-center justify-between px-12 pt-10 pb-6 border-b border-dashed border-border">
+        <div className="flex items-center justify-center px-12 pt-10 pb-6 border-b border-dashed border-border">
           <div className="flex items-center gap-3">
             <SlidersHorizontal className="h-5 w-5 text-primary" />
             <h1 className="text-xl font-semibold text-foreground">Palettenregal konfigurieren</h1>
           </div>
-          <button
-            onClick={() => setCollapsed(!collapsed)}
-            className="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors"
-          >
-            {collapsed ? "Ausklappen" : "Einklappen"}
-            <ChevronUp className={`h-4 w-4 transition-transform ${collapsed ? "rotate-180" : ""}`} />
-          </button>
         </div>
 
-        {!collapsed && (
+
+
           <div className="flex flex-col lg:flex-row">
             <div className="flex-1 px-12 py-8 pb-12 space-y-6 border-r border-dashed border-border">
               <div>
@@ -256,7 +250,8 @@ export default function ShelfConfigurator() {
               </div>
             </div>
           </div>
-        )}
+
+
       </div>
     </div>
   );
