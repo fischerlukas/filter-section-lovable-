@@ -174,7 +174,7 @@ export default function ShelfConfigurator() {
               {/* Titel unter dem Bild nur auf Smartphone - klickbar zum Einklappen */}
               <button
                 onClick={() => setMobileConfigOpen(!mobileConfigOpen)}
-                className="flex sm:hidden items-center gap-3 w-full justify-center"
+                className={`flex sm:hidden items-center gap-3 w-full justify-center ${!mobileConfigOpen ? "mb-4" : ""}`}
               >
                 <SlidersHorizontal className="h-5 w-5 text-primary" />
                 <h1 className="text-lg font-semibold text-foreground">Wähle dein Palettenregal</h1>
