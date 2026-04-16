@@ -105,6 +105,7 @@ export default function ShelfConfigurator() {
   const [levelsSelected, setLevelsSelected] = useState<string | null>(null);
   const [surfaceSelected, setSurfaceSelected] = useState<SurfaceType | null>(null);
   const [activeTab, setActiveTab] = useState<"config" | "accessories" | "faq">("config");
+  const [mobileConfigOpen, setMobileConfigOpen] = useState(true);
 
   const allFilters = useMemo(() => {
     const filters: { label: string; value: string; remove: () => void }[] = [];
@@ -170,14 +171,18 @@ export default function ShelfConfigurator() {
             {/* Bild oben auf Mobile/Tablet */}
             <div className="w-full lg:hidden flex flex-col items-center justify-center p-6 sm:p-8 gap-4 border-b border-dashed border-border">
               <img src={shelfIllustration} alt="Regal-Illustration mit Höhe, Länge, Tiefe und Ebenen" className="w-full max-w-xs object-contain" />
-              {/* Titel unter dem Bild nur auf Smartphone */}
-              <div className="flex sm:hidden items-center gap-3">
+              {/* Titel unter dem Bild nur auf Smartphone - klickbar zum Einklappen */}
+              <button
+                onClick={() => setMobileConfigOpen(!mobileConfigOpen)}
+                className="flex sm:hidden items-center gap-3 w-full justify-center"
+              >
                 <SlidersHorizontal className="h-5 w-5 text-primary" />
                 <h1 className="text-lg font-semibold text-foreground">Wähle dein Palettenregal</h1>
-              </div>
+                <ChevronDown className={`h-4 w-4 text-muted-foreground transition-transform duration-300 ${mobileConfigOpen ? "rotate-180" : ""}`} />
+              </button>
             </div>
 
-            <div className="w-full lg:w-[50%] px-6 sm:px-12 py-6 sm:py-8 pb-8 sm:pb-12 space-y-6 lg:border-r border-dashed border-border">
+            <div className={`w-full lg:w-[50%] px-6 sm:px-12 py-6 sm:py-8 pb-8 sm:pb-12 space-y-6 lg:border-r border-dashed border-border sm:!block ${mobileConfigOpen ? "block" : "hidden sm:block"}`}>
               <div>
                 <label className="text-xs font-semibold tracking-wider text-muted-foreground uppercase mb-3 block">
                   Belastung pro Palette
