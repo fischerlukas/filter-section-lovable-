@@ -184,10 +184,10 @@ export default function ShelfConfigurator() {
             </div>
 
             {/* Mobile: "Filtern und sortieren" Button + Produktanzahl */}
-            <div className="sm:hidden w-full px-6 pb-6 flex items-center gap-4">
+            <div className="sm:hidden w-full px-6 pb-6 flex items-center gap-4 min-h-[88px]">
               <button
                 onClick={() => setMobileFilterOpen(true)}
-                className="rounded-full border border-border px-5 py-3 text-sm font-medium text-foreground hover:bg-secondary transition-colors whitespace-nowrap"
+                className="rounded-full border border-border px-5 py-3 text-sm font-medium text-foreground hover:bg-secondary transition-colors whitespace-nowrap shrink-0"
               >
                 Filtern und sortieren
               </button>
