@@ -184,13 +184,13 @@ export default function ShelfConfigurator() {
                       <button
                         key={opt}
                         onClick={() => setLoadsSelected(loadsSelected === opt ? null : opt)}
-                        className={`group relative flex items-center gap-2 pl-2.5 pr-4 py-2 rounded-full border-2 transition-all ${
+                        className={`group relative flex items-center gap-1.5 sm:gap-2 pl-2 sm:pl-2.5 pr-3 sm:pr-4 py-1.5 sm:py-2 rounded-full border-2 transition-all text-xs sm:text-sm ${
                           isActive
                             ? "bg-primary text-primary-foreground shadow-lg border-primary"
                             : "bg-secondary text-muted-foreground hover:bg-muted hover:text-foreground border-border hover:border-muted-foreground/40"
                         }`}
                       >
-                        <div className={`flex size-5 shrink-0 items-center justify-center rounded-full shadow-sm ${
+                        <div className={`flex size-4 sm:size-5 shrink-0 items-center justify-center rounded-full shadow-sm ${
                           isActive ? "bg-white" : "bg-muted ring-1 ring-border"
                         }`}>
                           {isActive ? (
@@ -199,7 +199,7 @@ export default function ShelfConfigurator() {
                             <div className="size-2 rounded-full bg-muted-foreground/30" />
                           )}
                         </div>
-                        <span className="text-sm tabular-nums tracking-wide font-bold">
+                        <span className="text-xs sm:text-sm tabular-nums tracking-wide font-bold">
                           {opt}
                         </span>
                       </button>
