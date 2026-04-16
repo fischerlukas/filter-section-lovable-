@@ -96,7 +96,7 @@ const sortOptions = [
 
 export default function ShelfConfigurator() {
   
-  const [loadsSelected, setLoadsSelected] = useState<Set<string>>(new Set(loadOptions));
+  const [loadsSelected, setLoadsSelected] = useState<string | null>(null);
   const [sortBy, setSortBy] = useState("Ausgewählt");
   const [sortOpen, setSortOpen] = useState(false);
   const [widthSelected, setWidthSelected] = useState<string | null>(null);
@@ -112,7 +112,7 @@ export default function ShelfConfigurator() {
     if (heightSelected) filters.push({ label: heightSelected, value: heightSelected, remove: () => setHeightSelected(null) });
     if (depthSelected) filters.push({ label: depthSelected, value: depthSelected, remove: () => setDepthSelected(null) });
     if (levelsSelected) filters.push({ label: levelsSelected + " Ebenen", value: levelsSelected, remove: () => setLevelsSelected(null) });
-    loadsSelected.forEach((v) => filters.push({ label: v, value: v, remove: () => setLoadsSelected((prev) => { const n = new Set(prev); n.delete(v); return n; }) }));
+    if (loadsSelected) filters.push({ label: loadsSelected, value: loadsSelected, remove: () => setLoadsSelected(null) });
     if (surfaceSelected) {
       const s = surfaceOptions.find((o) => o.id === surfaceSelected);
       if (s) filters.push({ label: s.label, value: surfaceSelected, remove: () => setSurfaceSelected(null) });
@@ -128,7 +128,7 @@ export default function ShelfConfigurator() {
     setHeightSelected(null);
     setDepthSelected(null);
     setLevelsSelected(null);
-    setLoadsSelected(new Set());
+    setLoadsSelected(null);
     setSurfaceSelected(null);
   };
 
@@ -174,11 +174,11 @@ export default function ShelfConfigurator() {
                 </label>
                 <div className="flex flex-wrap items-center gap-2">
                   {loadOptions.map((opt) => {
-                    const isActive = loadsSelected.has(opt);
+                    const isActive = loadsSelected === opt;
                     return (
                       <button
                         key={opt}
-                        onClick={() => setLoadsSelected((prev) => { const n = new Set(prev); if (n.has(opt)) n.delete(opt); else n.add(opt); return n; })}
+                        onClick={() => setLoadsSelected(loadsSelected === opt ? null : opt)}
                         className={`group relative flex items-center gap-2 pl-2.5 pr-4 py-2 rounded-full border-2 transition-all ${
                           isActive
                             ? "bg-primary text-primary-foreground shadow-lg border-primary"
