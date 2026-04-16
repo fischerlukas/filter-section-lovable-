@@ -187,9 +187,10 @@ export default function ShelfConfigurator() {
             <div className="sm:hidden w-full px-6 pb-6 flex flex-col items-stretch gap-3 min-h-[88px]">
               <button
                 onClick={() => setMobileFilterOpen(true)}
-                className="w-full rounded-full border border-border px-5 py-3 text-sm font-medium text-foreground hover:bg-secondary transition-colors text-center"
+                className="w-full rounded-full border border-border px-5 py-3 text-sm font-medium text-foreground hover:bg-secondary transition-colors text-center inline-flex items-center justify-center gap-2"
               >
-                Filtern und sortieren
+                <SlidersHorizontal className="h-4 w-4 text-primary" />
+                Wähle dein Palettenregal
               </button>
               <span className="text-sm text-muted-foreground text-center">
                 {filteredCount} {allFilters.length > 0 ? `von ${totalProducts}` : ""} Produkte werden angezeigt
