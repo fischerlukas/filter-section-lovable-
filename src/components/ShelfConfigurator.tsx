@@ -133,7 +133,7 @@ export default function ShelfConfigurator() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center p-2 sm:p-4 relative overflow-hidden" style={{ background: 'linear-gradient(to bottom, hsl(0 0% 96%) 0%, hsl(0 0% 100%) 50%)' }}>
+    <div className="min-h-screen flex flex-col items-center sm:justify-center p-0 sm:p-4 relative overflow-hidden" style={{ background: 'linear-gradient(to bottom, hsl(0 0% 96%) 0%, hsl(0 0% 100%) 50%)' }}>
       <svg
         className="absolute top-0 left-0 w-full pointer-events-none"
         style={{ height: '500px' }}
