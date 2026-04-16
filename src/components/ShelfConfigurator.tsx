@@ -245,7 +245,7 @@ export default function ShelfConfigurator() {
 
                   {/* Aktive Filter */}
                   {allFilters.length > 0 && (
-                    <div className="border-t border-border pt-4">
+                    <div className="border-t border-border pt-4 animate-fade-in-soft">
                       <div className="flex items-center gap-2 mb-2">
                         <span className="text-sm font-semibold text-foreground">Aktive Filter:</span>
                         <div className="flex flex-wrap gap-2">
