@@ -243,8 +243,6 @@ export default function ShelfConfigurator() {
                     </div>
                   </div>
 
-                  <div className="border-t border-border pt-4" />
-
                   {/* Belastung */}
                   <div>
                     <label className="text-xs font-semibold tracking-wider text-muted-foreground uppercase mb-3 block">
