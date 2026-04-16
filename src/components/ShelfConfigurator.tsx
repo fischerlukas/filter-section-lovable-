@@ -140,9 +140,20 @@ export default function ShelfConfigurator() {
         viewBox="0 0 1440 500"
         preserveAspectRatio="none"
       >
+        <defs>
+          <filter id="innerShadow">
+            <feGaussianBlur in="SourceAlpha" stdDeviation="8" result="blur" />
+            <feOffset in="blur" dx="0" dy="4" result="offsetBlur" />
+            <feComposite in="offsetBlur" in2="SourceGraphic" operator="arithmetic" k2="-1" k3="1" result="innerShadow" />
+            <feFlood floodColor="rgba(0,0,0,0.12)" result="color" />
+            <feComposite in="color" in2="innerShadow" operator="in" result="shadow" />
+            <feComposite in="shadow" in2="SourceGraphic" operator="over" />
+          </filter>
+        </defs>
         <path
           d="M0,0 L1440,0 L1440,380 Q720,500 0,380 Z"
           fill="hsl(0 0% 93%)"
+          filter="url(#innerShadow)"
         />
       </svg>
       <div className="bg-card shadow-lg max-w-5xl w-full relative z-10 mt-16" style={{ borderRadius: "50px" }}>
