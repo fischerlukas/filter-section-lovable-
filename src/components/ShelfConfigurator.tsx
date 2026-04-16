@@ -156,7 +156,7 @@ export default function ShelfConfigurator() {
           filter="url(#innerShadow)"
         />
       </svg>
-      <div className="bg-card max-w-5xl w-full relative z-10 mt-8 sm:mt-16" style={{ borderRadius: "clamp(24px, 5vw, 50px)", boxShadow: "0 0 45px 5px rgba(0,0,0,0.08)" }}>
+      <div className="bg-card w-full max-w-5xl relative z-10 mt-0 sm:mt-16 sm:shadow-[0_0_45px_5px_rgba(0,0,0,0.08)]" style={{ borderRadius: "0px" }} ref={(el) => { if (el) { const sm = window.matchMedia('(min-width: 640px)'); const apply = () => el.style.borderRadius = sm.matches ? 'clamp(24px, 5vw, 50px)' : '0px'; sm.addEventListener('change', apply); apply(); } }}>
         <div className="flex items-center justify-center px-6 sm:px-12 pt-6 sm:pt-10 pb-4 sm:pb-6 border-b border-dashed border-border">
           <div className="flex items-center gap-3">
             <SlidersHorizontal className="h-5 w-5 text-primary" />
