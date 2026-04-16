@@ -187,6 +187,14 @@ export default function ShelfConfigurator() {
                 <SlidersHorizontal className="h-4 w-4 text-primary" />
                 Wähle dein Palettenregal
               </button>
+              <div className="flex items-center justify-center gap-2">
+                <button className="rounded-full border border-border px-4 py-1.5 text-xs font-medium text-foreground hover:bg-secondary transition-colors">
+                  Zubehör
+                </button>
+                <button className="rounded-full border border-border px-4 py-1.5 text-xs font-medium text-foreground hover:bg-secondary transition-colors">
+                  FAQ
+                </button>
+              </div>
               <span className="text-sm text-muted-foreground text-center">
                 {filteredCount} {allFilters.length > 0 ? `von ${totalProducts}` : ""} Produkte werden angezeigt
               </span>
