@@ -97,27 +97,35 @@ export default function ShelfConfigurator() {
                 <label className="text-xs font-semibold tracking-wider text-muted-foreground uppercase mb-3 block">
                   Belastung / Palette
                 </label>
-                <div className="flex gap-2">
-                  {loadOptions.map((opt) => (
-                    <button
-                      key={opt}
-                      onClick={() => {
-                        setLoadsSelected((prev) => {
-                          const next = new Set(prev);
-                          if (next.has(opt)) next.delete(opt);
-                          else next.add(opt);
-                          return next;
-                        });
-                      }}
-                      className={`px-5 py-2 text-sm font-medium rounded-full transition-all border-2 ${
-                        loadsSelected.has(opt)
-                          ? "border-primary bg-primary/5 text-primary"
-                          : "border-transparent bg-secondary text-muted-foreground hover:border-muted-foreground/30 hover:text-foreground"
-                      }`}
-                    >
-                      {opt}
-                    </button>
-                  ))}
+                <div className="grid grid-cols-3 gap-3">
+                  {loadOptions.map((opt) => {
+                    const num = opt.replace(" kg", "");
+                    return (
+                      <button
+                        key={opt}
+                        onClick={() => {
+                          setLoadsSelected((prev) => {
+                            const next = new Set(prev);
+                            if (next.has(opt)) next.delete(opt);
+                            else next.add(opt);
+                            return next;
+                          });
+                        }}
+                        className={`rounded-xl border-2 p-4 text-center transition-all ${
+                          loadsSelected.has(opt)
+                            ? "border-primary bg-primary/5"
+                            : "border-transparent bg-secondary hover:border-muted-foreground/30"
+                        }`}
+                      >
+                        <div className={`text-2xl font-bold ${loadsSelected.has(opt) ? "text-primary" : "text-foreground"}`}>
+                          {num}
+                        </div>
+                        <div className={`text-xs font-medium mt-1 ${loadsSelected.has(opt) ? "text-primary/70" : "text-muted-foreground"}`}>
+                          kg / Palette
+                        </div>
+                      </button>
+                    );
+                  })}
                 </div>
               </div>
 
