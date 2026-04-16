@@ -318,32 +318,74 @@ export default function ShelfConfigurator() {
 
       </div>
 
-      {allFilters.length > 0 && (
-        <div className="flex flex-col items-center gap-3 mt-6 max-w-5xl w-full relative z-10">
-          <p className="text-sm text-muted-foreground">
-            {filteredCount} von {totalProducts} Produkten werden angezeigt
-          </p>
-          <div className="flex flex-wrap justify-center items-center gap-2">
-            {allFilters.map((f, i) => (
-              <span
-                key={i}
-                className="inline-flex items-center gap-1.5 rounded-full bg-secondary px-3 py-1 text-sm text-muted-foreground hover:bg-muted hover:text-foreground transition-colors cursor-default"
+      <div className="flex flex-col items-center gap-3 mt-6 max-w-5xl w-full relative z-10">
+        {allFilters.length > 0 && (
+          <>
+            <p className="text-sm text-muted-foreground">
+              {filteredCount} von {totalProducts} Produkten werden angezeigt
+            </p>
+            <div className="flex flex-wrap justify-center items-center gap-2">
+              {allFilters.map((f, i) => (
+                <span
+                  key={i}
+                  className="inline-flex items-center gap-1.5 rounded-full bg-secondary px-3 py-1 text-sm text-muted-foreground hover:bg-muted hover:text-foreground transition-colors cursor-default"
+                >
+                  {f.label}
+                  <button onClick={f.remove} className="text-muted-foreground hover:text-foreground transition-colors">
+                    <X className="h-3 w-3" />
+                  </button>
+                </span>
+              ))}
+              <button
+                onClick={clearAll}
+                className="text-sm text-muted-foreground underline underline-offset-4 hover:text-foreground transition-colors ml-2"
               >
-                {f.label}
-                <button onClick={f.remove} className="text-muted-foreground hover:text-foreground transition-colors">
-                  <X className="h-3 w-3" />
-                </button>
-              </span>
-            ))}
-            <button
-              onClick={clearAll}
-              className="text-sm text-muted-foreground underline underline-offset-4 hover:text-foreground transition-colors ml-2"
-            >
-              Alles löschen
-            </button>
-          </div>
+                Alles löschen
+              </button>
+            </div>
+          </>
+        )}
+
+        <div className="relative mt-2">
+          <label className="text-xs font-semibold tracking-wider text-muted-foreground uppercase mr-3">
+            Sortieren nach:
+          </label>
+          <button
+            type="button"
+            onClick={() => setSortOpen(!sortOpen)}
+            className={`inline-flex items-center gap-2 rounded-full border bg-card px-5 py-2 text-sm shadow-sm transition-colors hover:border-muted-foreground/40 ${
+              sortOpen ? "border-primary" : "border-input"
+            }`}
+          >
+            <span className="text-foreground font-medium">{sortBy}</span>
+            <ChevronDown className={`h-4 w-4 text-muted-foreground transition-transform ${sortOpen ? "rotate-180" : ""}`} />
+          </button>
+          {sortOpen && (
+            <>
+              <div className="fixed inset-0 z-10" onClick={() => setSortOpen(false)} />
+              <div className="absolute left-1/2 -translate-x-1/2 top-full z-20 mt-1 w-64 overflow-hidden rounded-2xl border border-border bg-card shadow-lg">
+                <div className="p-1">
+                  {sortOptions.map((opt) => (
+                    <button
+                      key={opt}
+                      type="button"
+                      onClick={() => { setSortBy(opt); setSortOpen(false); }}
+                      className={`flex w-full items-center gap-2 rounded-xl px-4 py-2.5 text-sm transition-colors ${
+                        sortBy === opt
+                          ? "bg-primary/10 text-foreground font-medium"
+                          : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                      }`}
+                    >
+                      {sortBy === opt && <Check className="h-3.5 w-3.5 text-primary" />}
+                      {opt}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </>
+          )}
         </div>
-      )}
+      </div>
     </div>
   );
 }
