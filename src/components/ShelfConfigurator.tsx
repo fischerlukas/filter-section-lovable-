@@ -251,12 +251,7 @@ export default function ShelfConfigurator() {
 
               <div className="flex gap-3 pt-2">
                 <button
-                  onClick={() => setActiveTab("accessories")}
-                  className={`group px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-300 flex items-center overflow-hidden ${
-                    activeTab === "accessories"
-                      ? "bg-primary text-primary-foreground shadow-none hover:shadow-[0_10px_30px_-5px_hsl(var(--primary)/0.5)] hover:scale-105 hover:-translate-y-1"
-                      : "border border-border text-foreground hover:bg-secondary"
-                  }`}
+                  className="group px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-300 flex items-center overflow-hidden border border-border text-foreground hover:bg-secondary"
                 >
                   Zubehör
                   <span className="inline-flex w-0 overflow-hidden opacity-0 group-hover:w-6 group-hover:opacity-100 transition-all duration-300 ml-0 group-hover:ml-2">
@@ -264,12 +259,7 @@ export default function ShelfConfigurator() {
                   </span>
                 </button>
                 <button
-                  onClick={() => setActiveTab("faq")}
-                  className={`group px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-300 flex items-center overflow-hidden ${
-                    activeTab === "faq"
-                      ? "bg-primary text-primary-foreground shadow-none hover:shadow-[0_10px_30px_-5px_hsl(var(--primary)/0.5)] hover:scale-105 hover:-translate-y-1"
-                      : "border border-border text-foreground hover:bg-secondary"
-                  }`}
+                  className="group px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-300 flex items-center overflow-hidden border border-border text-foreground hover:bg-secondary"
                 >
                   FAQ
                   <span className="inline-flex w-0 overflow-hidden opacity-0 group-hover:w-6 group-hover:opacity-100 transition-all duration-300 ml-0 group-hover:ml-2">
