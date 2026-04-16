@@ -82,6 +82,7 @@ function MultiSelectDropdown({ label, selected, options, onChange }: MultiSelect
                 </button>
               );
             })}
+            </div>
           </div>
         </>
       )}
