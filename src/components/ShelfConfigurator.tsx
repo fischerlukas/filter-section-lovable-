@@ -184,10 +184,10 @@ export default function ShelfConfigurator() {
             </div>
 
             {/* Mobile: "Filtern und sortieren" Button + Produktanzahl */}
-            <div className="sm:hidden w-full px-6 pb-6 flex items-center gap-4">
+            <div className="sm:hidden w-full px-6 pb-6 flex items-center gap-4 min-h-[88px]">
               <button
                 onClick={() => setMobileFilterOpen(true)}
-                className="rounded-full border border-border px-5 py-3 text-sm font-medium text-foreground hover:bg-secondary transition-colors whitespace-nowrap"
+                className="rounded-full border border-border px-5 py-3 text-sm font-medium text-foreground hover:bg-secondary transition-colors whitespace-nowrap shrink-0"
               >
                 Filtern und sortieren
               </button>
@@ -198,7 +198,7 @@ export default function ShelfConfigurator() {
 
             {/* Mobile Filter Sheet */}
             <Sheet open={mobileFilterOpen} onOpenChange={setMobileFilterOpen}>
-              <SheetContent side="bottom" className="h-[90vh] rounded-t-2xl overflow-y-auto p-0">
+              <SheetContent side="bottom" className="h-[90vh] rounded-t-2xl overflow-y-auto p-0 data-[state=open]:!duration-700 data-[state=closed]:!duration-500">
                 <SheetHeader className="sticky top-0 bg-card z-10 flex flex-row items-center justify-between px-6 py-4 border-b border-border">
                   <SheetTitle className="text-base font-semibold uppercase tracking-wider">Filtern und Sortieren</SheetTitle>
                   <SheetClose className="rounded-full p-1 hover:bg-muted transition-colors">
