@@ -1,12 +1,5 @@
 import { useState } from "react";
-import { ChevronUp, ArrowRight, SlidersHorizontal } from "lucide-react";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { ChevronDown, ChevronUp, ArrowRight, SlidersHorizontal } from "lucide-react";
 
 const loadOptions = ["500 kg", "1.000 kg", "1.500 kg"];
 
@@ -17,11 +10,43 @@ const levelOptions = ["2", "3", "4", "5", "6"];
 
 type SurfaceType = "none" | "wire" | "wood";
 
+type NativeSelectFieldProps = {
+  label: string;
+  value: string;
+  options: string[];
+  onChange: (value: string) => void;
+};
+
 const surfaces: { id: SurfaceType; label: string; sub: string; price: string }[] = [
   { id: "none", label: "Ohne Auflage", sub: "Ohne Aufpreis", price: "inkl." },
   { id: "wire", label: "Drahtgitter", sub: "Verzinkt", price: "104,31 €" },
   { id: "wood", label: "Holzboden", sub: "Spanplatte", price: "91,71 €" },
 ];
+
+function NativeSelectField({ label, value, options, onChange }: NativeSelectFieldProps) {
+  return (
+    <div>
+      <label className="text-xs font-semibold tracking-wider text-muted-foreground uppercase mb-2 block">
+        {label}
+      </label>
+      <div className="relative">
+        <select
+          value={value}
+          onChange={(event) => onChange(event.target.value)}
+          className="h-10 w-full appearance-none rounded-full border border-input bg-card px-4 pr-10 text-sm text-foreground outline-none transition-colors focus:outline-none"
+        >
+          <option value="">auswählen</option>
+          {options.map((option) => (
+            <option key={option} value={option}>
+              {option}
+            </option>
+          ))}
+        </select>
+        <ChevronDown className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+      </div>
+    </div>
+  );
+}
 
 export default function ShelfConfigurator() {
   const [collapsed, setCollapsed] = useState(false);
@@ -35,7 +60,6 @@ export default function ShelfConfigurator() {
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden">
-      {/* Background split – gray top, white bottom with gentle curve */}
       <svg
         className="absolute inset-0 w-full h-full pointer-events-none"
         viewBox="0 0 1440 900"
@@ -46,31 +70,24 @@ export default function ShelfConfigurator() {
           fill="hsl(0 0% 93%)"
         />
       </svg>
-      <div className="bg-card shadow-lg max-w-5xl w-full overflow-hidden relative z-10" style={{ borderRadius: '50px' }}>
-        {/* Header */}
+      <div className="bg-card shadow-lg max-w-5xl w-full overflow-hidden relative z-10" style={{ borderRadius: "50px" }}>
         <div className="flex items-center justify-between px-12 pt-10 pb-6 border-b border-dashed border-border">
           <div className="flex items-center gap-3">
             <SlidersHorizontal className="h-5 w-5 text-primary" />
-            <h1 className="text-xl font-semibold text-foreground">
-              Palettenregal konfigurieren
-            </h1>
+            <h1 className="text-xl font-semibold text-foreground">Palettenregal konfigurieren</h1>
           </div>
           <button
             onClick={() => setCollapsed(!collapsed)}
             className="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors"
           >
             {collapsed ? "Ausklappen" : "Einklappen"}
-            <ChevronUp
-              className={`h-4 w-4 transition-transform ${collapsed ? "rotate-180" : ""}`}
-            />
+            <ChevronUp className={`h-4 w-4 transition-transform ${collapsed ? "rotate-180" : ""}`} />
           </button>
         </div>
 
         {!collapsed && (
           <div className="flex flex-col lg:flex-row">
-            {/* Left: Config */}
             <div className="flex-1 px-12 py-8 pb-12 space-y-6 border-r border-dashed border-border">
-              {/* Load */}
               <div>
                 <label className="text-xs font-semibold tracking-wider text-muted-foreground uppercase mb-3 block">
                   Belastung / Palette
@@ -92,75 +109,16 @@ export default function ShelfConfigurator() {
                 </div>
               </div>
 
-              {/* Width & Height */}
               <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="text-xs font-semibold tracking-wider text-muted-foreground uppercase mb-2 block">
-                    Breite
-                  </label>
-                  <Select value={width} onValueChange={setWidth}>
-                    <SelectTrigger className="bg-card">
-                      <SelectValue placeholder="auswählen" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {widthOptions.map((o) => (
-                        <SelectItem key={o} value={o}>{o}</SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-                <div>
-                  <label className="text-xs font-semibold tracking-wider text-muted-foreground uppercase mb-2 block">
-                    Höhe
-                  </label>
-                  <Select value={height} onValueChange={setHeight}>
-                    <SelectTrigger className="bg-card">
-                      <SelectValue placeholder="auswählen" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {heightOptions.map((o) => (
-                        <SelectItem key={o} value={o}>{o}</SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
+                <NativeSelectField label="Breite" value={width} options={widthOptions} onChange={setWidth} />
+                <NativeSelectField label="Höhe" value={height} options={heightOptions} onChange={setHeight} />
               </div>
 
-              {/* Depth & Levels */}
               <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="text-xs font-semibold tracking-wider text-muted-foreground uppercase mb-2 block">
-                    Tiefe
-                  </label>
-                  <Select value={depth} onValueChange={setDepth}>
-                    <SelectTrigger className="bg-card">
-                      <SelectValue placeholder="auswählen" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {depthOptions.map((o) => (
-                        <SelectItem key={o} value={o}>{o}</SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-                <div>
-                  <label className="text-xs font-semibold tracking-wider text-muted-foreground uppercase mb-2 block">
-                    Anzahl Ebenen
-                  </label>
-                  <Select value={levels} onValueChange={setLevels}>
-                    <SelectTrigger className="bg-card">
-                      <SelectValue placeholder="auswählen" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {levelOptions.map((o) => (
-                        <SelectItem key={o} value={o}>{o}</SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
+                <NativeSelectField label="Tiefe" value={depth} options={depthOptions} onChange={setDepth} />
+                <NativeSelectField label="Anzahl Ebenen" value={levels} options={levelOptions} onChange={setLevels} />
               </div>
 
-              {/* Surface */}
               <div>
                 <label className="text-xs font-semibold tracking-wider text-muted-foreground uppercase mb-3 block">
                   Auflage
@@ -187,7 +145,6 @@ export default function ShelfConfigurator() {
                 </div>
               </div>
 
-              {/* Tabs */}
               <div className="flex gap-3 pt-2">
                 <button
                   onClick={() => setActiveTab("config")}
@@ -223,7 +180,6 @@ export default function ShelfConfigurator() {
               </div>
             </div>
 
-            {/* Right: Illustration */}
             <div className="w-full lg:w-80 flex flex-col items-center justify-center p-12 gap-4">
               <div className="w-48 h-48 border-2 border-dashed border-border rounded-xl flex items-center justify-center">
                 <span className="text-sm text-muted-foreground">Regal-Illustration</span>
