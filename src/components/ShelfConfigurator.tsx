@@ -218,12 +218,6 @@ export default function ShelfConfigurator() {
               <div className="w-48 h-48 border-2 border-dashed border-border rounded-xl flex items-center justify-center">
                 <span className="text-sm text-muted-foreground">Regal-Illustration</span>
               </div>
-              <div className="flex gap-4 text-xs text-muted-foreground">
-                <span>A = Höhe</span>
-                <span>B = Tiefe</span>
-                <span>C = Breite</span>
-                <span>D = Ebenen</span>
-              </div>
             </div>
           </div>
         )}
