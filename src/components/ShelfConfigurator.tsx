@@ -480,7 +480,7 @@ export default function ShelfConfigurator() {
 
       </div>
 
-      <div className="flex flex-col items-center gap-3 mt-0 sm:mt-6 max-w-5xl w-full relative z-10 px-6 sm:px-0">
+      <div className="hidden sm:flex flex-col items-center gap-3 mt-0 sm:mt-6 max-w-5xl w-full relative z-10 px-6 sm:px-0">
         {allFilters.length > 0 && (
           <>
             <p className="text-sm text-muted-foreground">
