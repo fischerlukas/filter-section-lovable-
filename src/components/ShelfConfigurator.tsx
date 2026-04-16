@@ -113,18 +113,11 @@ export default function ShelfConfigurator() {
         />
       </svg>
       <div className="bg-card shadow-lg max-w-5xl w-full relative z-10" style={{ borderRadius: "50px" }}>
-        <div className="flex items-center justify-between px-12 pt-10 pb-6 border-b border-dashed border-border">
+        <div className="flex items-center justify-center px-12 pt-10 pb-6 border-b border-dashed border-border">
           <div className="flex items-center gap-3">
             <SlidersHorizontal className="h-5 w-5 text-primary" />
             <h1 className="text-xl font-semibold text-foreground">Palettenregal konfigurieren</h1>
           </div>
-          <button
-            onClick={() => setCollapsed(!collapsed)}
-            className="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors"
-          >
-            {collapsed ? "Ausklappen" : "Einklappen"}
-            <ChevronUp className={`h-4 w-4 transition-transform ${collapsed ? "rotate-180" : ""}`} />
-          </button>
         </div>
 
         {!collapsed && (
