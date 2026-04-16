@@ -227,18 +227,20 @@ export default function ShelfConfigurator() {
                     <button
                       key={s.id}
                       onClick={() => setSurfaceSelected(surfaceSelected === s.id ? null : s.id)}
-                      className={`rounded-xl border-2 p-4 text-left transition-all ${
+                      className={`rounded-xl border-2 p-3 sm:p-4 text-left transition-all flex sm:flex-col flex-row items-center sm:items-start gap-3 sm:gap-0 ${
                         surfaceSelected === s.id
                           ? "border-primary bg-primary/5"
                           : "border-transparent bg-secondary hover:border-muted-foreground/30"
                       }`}
                     >
-                      <div className="h-10 w-10 rounded bg-muted mb-3" />
-                      <div className="text-sm font-medium text-foreground">{s.label}</div>
-                      <div className="text-xs text-muted-foreground">{s.sub}</div>
-                      <div className={`text-sm font-semibold mt-1 ${surfaceSelected === s.id ? "text-primary" : "text-foreground"}`}>
-                        {s.id !== "none" ? `ab ${s.price}` : s.price}
+                      <div className="flex-1 sm:order-none">
+                        <div className="text-sm font-medium text-foreground">{s.label}</div>
+                        <div className="text-xs text-muted-foreground">{s.sub}</div>
+                        <div className={`text-sm font-semibold mt-1 ${surfaceSelected === s.id ? "text-primary" : "text-foreground"}`}>
+                          {s.id !== "none" ? `ab ${s.price}` : s.price}
+                        </div>
                       </div>
+                      <div className="h-10 w-10 rounded bg-muted shrink-0 sm:mb-3 sm:order-first" />
                     </button>
                   ))}
                 </div>
