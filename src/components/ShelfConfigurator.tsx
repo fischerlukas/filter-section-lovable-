@@ -289,7 +289,7 @@ export default function ShelfConfigurator() {
             {allFilters.map((f, i) => (
               <span
                 key={i}
-                className="inline-flex items-center gap-1.5 rounded-full bg-muted px-3 py-1 text-sm text-muted-foreground hover:bg-muted-foreground/20 transition-colors cursor-default"
+                className="inline-flex items-center gap-1.5 rounded-full bg-muted-foreground/15 px-3 py-1 text-sm text-muted-foreground hover:bg-muted-foreground/25 transition-colors cursor-default"
               >
                 {f.label}
                 <button onClick={f.remove} className="text-muted-foreground hover:text-foreground transition-colors">
