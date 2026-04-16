@@ -11,45 +11,73 @@ const levelOptions = ["2", "3", "4", "5", "6"];
 
 type SurfaceType = "none" | "wire" | "wood";
 
-type StyledNativeSelectProps = {
+type MultiSelectProps = {
   label: string;
-  value: string;
+  selected: Set<string>;
   options: string[];
-  onChange: (value: string) => void;
+  onChange: (selected: Set<string>) => void;
 };
 
-const surfaces: { id: SurfaceType; label: string; sub: string; price: string }[] = [
-  { id: "none", label: "Ohne Auflage", sub: "Ohne Aufpreis", price: "inkl." },
-  { id: "wire", label: "Drahtgitter", sub: "Verzinkt", price: "104,31 €" },
-  { id: "wood", label: "Holzboden", sub: "Spanplatte", price: "91,71 €" },
-];
+function MultiSelectDropdown({ label, selected, options, onChange }: MultiSelectProps) {
+  const [open, setOpen] = useState(false);
 
-function StyledNativeSelect({ label, value, options, onChange }: StyledNativeSelectProps) {
+  const toggle = (opt: string) => {
+    const next = new Set(selected);
+    if (next.has(opt)) next.delete(opt);
+    else next.add(opt);
+    onChange(next);
+  };
+
+  const displayText = selected.size > 0
+    ? Array.from(selected).join(", ")
+    : "auswählen";
+
   return (
-    <div>
+    <div className="relative">
       <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-muted-foreground">
         {label}
       </label>
-      <div className="group relative">
-        <div className="pointer-events-none flex h-11 w-full items-center justify-between rounded-full border border-input bg-card px-5 text-sm shadow-sm transition-colors group-hover:border-muted-foreground/40 group-focus-within:border-primary">
-          <span className={value ? "text-foreground" : "text-muted-foreground"}>
-            {value || "auswählen"}
-          </span>
-          <ChevronDown className="h-4 w-4 text-muted-foreground transition-colors group-focus-within:text-foreground" />
-        </div>
-        <select
-          value={value}
-          onChange={(event) => onChange(event.target.value)}
-          className="absolute inset-0 h-full w-full cursor-pointer appearance-none rounded-full opacity-0"
-        >
-          <option value="">auswählen</option>
-          {options.map((option) => (
-            <option key={option} value={option}>
-              {option}
-            </option>
-          ))}
-        </select>
-      </div>
+      <button
+        type="button"
+        onClick={() => setOpen(!open)}
+        className={`flex h-11 w-full items-center justify-between rounded-full border bg-card px-5 text-sm shadow-sm transition-colors hover:border-muted-foreground/40 ${
+          open ? "border-primary" : "border-input"
+        }`}
+      >
+        <span className={`truncate pr-2 ${selected.size > 0 ? "text-foreground" : "text-muted-foreground"}`}>
+          {displayText}
+        </span>
+        <ChevronDown className={`h-4 w-4 shrink-0 text-muted-foreground transition-transform ${open ? "rotate-180" : ""}`} />
+      </button>
+      {open && (
+        <>
+          <div className="fixed inset-0 z-10" onClick={() => setOpen(false)} />
+          <div className="absolute left-0 right-0 top-full z-20 mt-1 max-h-48 overflow-auto rounded-2xl border border-border bg-card p-1 shadow-lg">
+            {options.map((opt) => {
+              const isSelected = selected.has(opt);
+              return (
+                <button
+                  key={opt}
+                  type="button"
+                  onClick={() => toggle(opt)}
+                  className={`flex w-full items-center gap-2 rounded-xl px-4 py-2.5 text-sm transition-colors ${
+                    isSelected
+                      ? "bg-primary/10 text-foreground font-medium"
+                      : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                  }`}
+                >
+                  <div className={`flex size-5 shrink-0 items-center justify-center rounded-md border transition-colors ${
+                    isSelected ? "border-primary bg-primary" : "border-border bg-card"
+                  }`}>
+                    {isSelected && <Check className="h-3 w-3 text-primary-foreground" />}
+                  </div>
+                  {opt}
+                </button>
+              );
+            })}
+          </div>
+        </>
+      )}
     </div>
   );
 }
