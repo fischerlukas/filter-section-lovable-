@@ -222,7 +222,7 @@ export default function ShelfConfigurator() {
                 <label className="text-xs font-semibold tracking-wider text-muted-foreground uppercase mb-3 block">
                   Auflage
                 </label>
-                <div className="grid grid-cols-3 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                   {surfaceOptions.map((s) => (
                     <button
                       key={s.id}
