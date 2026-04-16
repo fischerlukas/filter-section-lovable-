@@ -11,6 +11,12 @@ const levelOptions = ["2", "3", "4", "5", "6"];
 
 type SurfaceType = "none" | "wire" | "wood";
 
+const surfaceOptions: { id: SurfaceType; label: string; sub: string; price: string }[] = [
+  { id: "none", label: "Ohne Auflage", sub: "Ohne Aufpreis", price: "inkl." },
+  { id: "wire", label: "Drahtgitter", sub: "Verzinkt", price: "104,31 €" },
+  { id: "wood", label: "Holzboden", sub: "Spanplatte", price: "91,71 €" },
+];
+
 type MultiSelectProps = {
   label: string;
   selected: Set<string>;
