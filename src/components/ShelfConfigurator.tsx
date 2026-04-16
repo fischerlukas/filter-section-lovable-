@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { ChevronDown, ChevronUp, ArrowRight, SlidersHorizontal } from "lucide-react";
 
 const loadOptions = ["500 kg", "1.000 kg", "1.500 kg"];
@@ -10,7 +10,7 @@ const levelOptions = ["2", "3", "4", "5", "6"];
 
 type SurfaceType = "none" | "wire" | "wood";
 
-type NativeSelectFieldProps = {
+type CustomSelectProps = {
   label: string;
   value: string;
   options: string[];
@@ -23,26 +23,50 @@ const surfaces: { id: SurfaceType; label: string; sub: string; price: string }[]
   { id: "wood", label: "Holzboden", sub: "Spanplatte", price: "91,71 €" },
 ];
 
-function NativeSelectField({ label, value, options, onChange }: NativeSelectFieldProps) {
+function CustomSelect({ label, value, options, onChange }: CustomSelectProps) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   return (
     <div>
       <label className="text-xs font-semibold tracking-wider text-muted-foreground uppercase mb-2 block">
         {label}
       </label>
-      <div className="relative">
-        <select
-          value={value}
-          onChange={(event) => onChange(event.target.value)}
-          className="h-10 w-full appearance-none rounded-full border border-input bg-card px-4 pr-10 text-sm text-foreground outline-none transition-colors focus:outline-none"
+      <div className="relative" ref={ref}>
+        <button
+          type="button"
+          onClick={() => setOpen(!open)}
+          className="flex h-10 w-full items-center justify-between rounded-full border border-input bg-card px-5 text-sm transition-colors hover:border-muted-foreground/50"
         >
-          <option value="">auswählen</option>
-          {options.map((option) => (
-            <option key={option} value={option}>
-              {option}
-            </option>
-          ))}
-        </select>
-        <ChevronDown className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+          <span className={value ? "text-foreground" : "text-muted-foreground"}>
+            {value || "auswählen"}
+          </span>
+          <ChevronDown className={`h-4 w-4 text-muted-foreground transition-transform ${open ? "rotate-180" : ""}`} />
+        </button>
+        {open && (
+          <div className="absolute left-0 right-0 top-full z-50 mt-1.5 rounded-2xl border border-input bg-card py-1.5 shadow-lg animate-in fade-in-0 zoom-in-95 duration-150">
+            {options.map((option) => (
+              <button
+                key={option}
+                type="button"
+                onClick={() => { onChange(option); setOpen(false); }}
+                className={`flex w-full items-center px-5 py-2 text-sm transition-colors hover:bg-secondary ${
+                  value === option ? "text-primary font-medium" : "text-foreground"
+                }`}
+              >
+                {option}
+              </button>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
@@ -110,13 +134,13 @@ export default function ShelfConfigurator() {
               </div>
 
               <div className="grid grid-cols-2 gap-4">
-                <NativeSelectField label="Breite" value={width} options={widthOptions} onChange={setWidth} />
-                <NativeSelectField label="Höhe" value={height} options={heightOptions} onChange={setHeight} />
+                <CustomSelect label="Breite" value={width} options={widthOptions} onChange={setWidth} />
+                <CustomSelect label="Höhe" value={height} options={heightOptions} onChange={setHeight} />
               </div>
 
               <div className="grid grid-cols-2 gap-4">
-                <NativeSelectField label="Tiefe" value={depth} options={depthOptions} onChange={setDepth} />
-                <NativeSelectField label="Anzahl Ebenen" value={levels} options={levelOptions} onChange={setLevels} />
+                <CustomSelect label="Tiefe" value={depth} options={depthOptions} onChange={setDepth} />
+                <CustomSelect label="Anzahl Ebenen" value={levels} options={levelOptions} onChange={setLevels} />
               </div>
 
               <div>
