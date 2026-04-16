@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Check } from "lucide-react";
+import { useState, useMemo } from "react";
+import { Check, X } from "lucide-react";
 import { ChevronDown, ArrowRight, SlidersHorizontal } from "lucide-react";
 
 const loadOptions = ["500 kg", "1.000 kg", "1.500 kg"];
@@ -99,6 +99,32 @@ export default function ShelfConfigurator() {
   const [levelsSelected, setLevelsSelected] = useState<Set<string>>(new Set());
   const [surfaces_selected, setSurfacesSelected] = useState<Set<SurfaceType>>(new Set());
   const [activeTab, setActiveTab] = useState<"config" | "accessories" | "faq">("config");
+
+  const allFilters = useMemo(() => {
+    const filters: { label: string; value: string; remove: () => void }[] = [];
+    widthSelected.forEach((v) => filters.push({ label: v, value: v, remove: () => setWidthSelected((prev) => { const n = new Set(prev); n.delete(v); return n; }) }));
+    heightSelected.forEach((v) => filters.push({ label: v, value: v, remove: () => setHeightSelected((prev) => { const n = new Set(prev); n.delete(v); return n; }) }));
+    depthSelected.forEach((v) => filters.push({ label: v, value: v, remove: () => setDepthSelected((prev) => { const n = new Set(prev); n.delete(v); return n; }) }));
+    levelsSelected.forEach((v) => filters.push({ label: v + " Ebenen", value: v, remove: () => setLevelsSelected((prev) => { const n = new Set(prev); n.delete(v); return n; }) }));
+    loadsSelected.forEach((v) => filters.push({ label: v, value: v, remove: () => setLoadsSelected((prev) => { const n = new Set(prev); n.delete(v); return n; }) }));
+    surfaces_selected.forEach((v) => {
+      const s = surfaceOptions.find((o) => o.id === v);
+      if (s) filters.push({ label: s.label, value: v, remove: () => setSurfacesSelected((prev) => { const n = new Set(prev); n.delete(v); return n; }) });
+    });
+    return filters;
+  }, [widthSelected, heightSelected, depthSelected, levelsSelected, loadsSelected, surfaces_selected]);
+
+  const totalProducts = 1020;
+  const filteredCount = allFilters.length > 0 ? Math.max(1, Math.round(totalProducts / (allFilters.length * 3 + 1))) : totalProducts;
+
+  const clearAll = () => {
+    setWidthSelected(new Set());
+    setHeightSelected(new Set());
+    setDepthSelected(new Set());
+    setLevelsSelected(new Set());
+    setLoadsSelected(new Set());
+    setSurfacesSelected(new Set());
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden">
@@ -208,6 +234,33 @@ export default function ShelfConfigurator() {
                   ))}
                 </div>
               </div>
+
+              {allFilters.length > 0 && (
+                <div className="space-y-2 pt-2">
+                  <p className="text-sm text-muted-foreground">
+                    <span className="font-semibold text-foreground">{filteredCount}</span> von {totalProducts} Produkten werden angezeigt
+                  </p>
+                  <div className="flex flex-wrap items-center gap-2">
+                    {allFilters.map((f, i) => (
+                      <span
+                        key={i}
+                        className="inline-flex items-center gap-1.5 rounded-full border border-border bg-secondary px-3 py-1 text-sm text-foreground"
+                      >
+                        {f.label}
+                        <button onClick={f.remove} className="text-muted-foreground hover:text-foreground transition-colors">
+                          <X className="h-3.5 w-3.5" />
+                        </button>
+                      </span>
+                    ))}
+                    <button
+                      onClick={clearAll}
+                      className="text-sm text-muted-foreground underline underline-offset-2 hover:text-foreground transition-colors ml-1"
+                    >
+                      Alles löschen
+                    </button>
+                  </div>
+                </div>
+              )}
 
               <div className="flex gap-3 pt-2">
                 <button
