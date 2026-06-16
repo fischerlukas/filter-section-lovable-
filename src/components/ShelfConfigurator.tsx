@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useRef, useEffect } from "react";
 import shelfIllustration from "@/assets/shelf-illustration.png";
 import { Check, X } from "lucide-react";
 import { ChevronDown, ArrowRight, SlidersHorizontal } from "lucide-react";
