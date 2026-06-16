@@ -102,7 +102,7 @@ function SingleSelectDropdown({ label, selected, options, onChange }: SingleSele
               })}
             </div>
             {showFade && (
-              <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-6 bg-gradient-to-t from-card/60 to-transparent" />
+              <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-10 bg-gradient-to-t from-card to-transparent" />
             )}
           </div>
         </>
