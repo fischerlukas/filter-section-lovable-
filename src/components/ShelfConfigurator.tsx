@@ -34,6 +34,25 @@ type SingleSelectProps = {
 
 function SingleSelectDropdown({ label, selected, options, onChange }: SingleSelectProps) {
   const [open, setOpen] = useState(false);
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [showFade, setShowFade] = useState(false);
+
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const check = () => {
+      const canScroll = el.scrollHeight > el.clientHeight;
+      const atBottom = el.scrollTop + el.clientHeight >= el.scrollHeight - 2;
+      setShowFade(canScroll && !atBottom);
+    };
+    check();
+    el.addEventListener("scroll", check);
+    window.addEventListener("resize", check);
+    return () => {
+      el.removeEventListener("scroll", check);
+      window.removeEventListener("resize", check);
+    };
+  }, [open, options]);
 
   const toggle = (opt: string) => {
     onChange(selected === opt ? null : opt);
@@ -62,26 +81,29 @@ function SingleSelectDropdown({ label, selected, options, onChange }: SingleSele
       {open && (
         <>
           <div className="fixed inset-0 z-10" onClick={() => setOpen(false)} />
-          <div className="absolute left-0 right-0 top-full z-20 mt-1 max-h-48 overflow-hidden rounded-2xl border border-border bg-card shadow-lg">
-            <div className="overflow-auto max-h-48 p-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-            {options.map((opt) => {
-              const isSelected = selected === opt;
-              return (
-                <button
-                  key={opt}
-                  type="button"
-                  onClick={() => toggle(opt)}
-                  className={`flex w-full items-center rounded-xl px-4 py-2.5 text-sm transition-colors ${
-                    isSelected
-                      ? "bg-primary/10 text-foreground font-medium"
-                      : "text-muted-foreground hover:bg-muted hover:text-foreground"
-                  }`}
-                >
-                  {opt}
-                </button>
-              );
-            })}
+          <div className="absolute left-0 right-0 top-full z-20 mt-1 max-h-[180px] overflow-hidden rounded-2xl border border-border bg-card shadow-lg">
+            <div ref={scrollRef} className="overflow-auto max-h-[180px] p-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+              {options.map((opt) => {
+                const isSelected = selected === opt;
+                return (
+                  <button
+                    key={opt}
+                    type="button"
+                    onClick={() => toggle(opt)}
+                    className={`flex w-full items-center rounded-xl px-4 py-2.5 text-sm transition-colors ${
+                      isSelected
+                        ? "bg-primary/10 text-foreground font-medium"
+                        : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                    }`}
+                  >
+                    {opt}
+                  </button>
+                );
+              })}
             </div>
+            {showFade && (
+              <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-card to-transparent" />
+            )}
           </div>
         </>
       )}
