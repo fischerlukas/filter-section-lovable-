@@ -81,8 +81,8 @@ function SingleSelectDropdown({ label, selected, options, onChange }: SingleSele
       {open && (
         <>
           <div className="fixed inset-0 z-10" onClick={() => setOpen(false)} />
-          <div className="absolute left-0 right-0 top-full z-20 mt-1 max-h-[180px] overflow-hidden rounded-2xl border border-border bg-card shadow-lg">
-            <div ref={scrollRef} className="overflow-auto max-h-[180px] p-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <div className="absolute left-0 right-0 top-full z-20 mt-1 max-h-[156px] overflow-hidden rounded-2xl border border-border bg-card shadow-lg">
+            <div ref={scrollRef} className="overflow-auto max-h-[156px] p-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
               {options.map((opt) => {
                 const isSelected = selected === opt;
                 return (
